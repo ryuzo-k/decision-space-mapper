@@ -157,7 +157,7 @@ async function install(args) {
     console.log(`- ${result.target}: ${result.destination}`);
   }
   console.log("");
-  console.log("Try: Use decision-space-mapper to map every option for this decision: ...");
+  console.log("Try: Use decision-space-mapper to generate concrete candidate artifacts for this decision: ...");
 }
 
 async function doctor() {
@@ -183,6 +183,8 @@ If you can run shell commands, run:
 npx skills add ryuzo-k/decision-space-mapper
 
 Then verify the install and tell me which adapters were installed.
+
+After installing, use it to generate concrete candidate artifacts for a real decision, not abstract advice.
 
 If npx is not available, fetch the GitHub repository and copy the decision-space-mapper skill folder into the current agent's skill directory. For Cursor, install the Cursor adapter as .cursor/rules/decision-space-mapper.mdc.`);
 }

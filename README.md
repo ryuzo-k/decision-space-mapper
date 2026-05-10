@@ -2,9 +2,9 @@
 
 [![skills.sh](https://skills.sh/b/ryuzo-k/decision-space-mapper)](https://skills.sh/ryuzo-k/decision-space-mapper)
 
-For people who do not want to use an AI agent's first answer as-is.
+For people who do not want abstract AI advice.
 
-Decision Space Mapper is an agent-native skill/protocol for Claude Code, Codex, Hermes Agent, Cursor, and generic AI agents. It makes an AI generate concrete candidate outputs before it recommends a path, especially for intangible decisions like product direction, positioning, pricing, launch plans, content strategy, offers, profiles, and career moves.
+Decision Space Mapper is an agent-native skill/protocol for Claude Code, Codex, Hermes Agent, Cursor, and generic AI agents. It makes an AI write the actual candidate artifacts before it recommends a path: profile drafts, offer drafts, product concepts, landing-page sections, launch posts, pricing packages, DM scripts, pitch copy, and other things a real person or simulation agent can react to.
 
 ## Install
 
@@ -65,14 +65,31 @@ I am deciding what product to build next...
 
 The skill returns:
 
-- Decision frame
-- Result families
-- Concrete candidate outputs grouped by family
+- Output target
+- Candidate output families
+- Concrete artifacts grouped by family
 - Blind spots
 - Comparison without premature narrowing
 - Next evidence to collect before committing
 
-Use it when the default AI answer feels too narrow, too confident, or too optimized for sounding helpful instead of producing the range of real outputs you could actually publish, ship, send, or test.
+Use it when the default AI answer feels too narrow, too confident, or too optimized for sounding helpful instead of producing the range of real outputs you could actually publish, ship, sell, send, simulate, or test.
+
+## What It Produces
+
+The skill should produce artifacts, not commentary.
+
+```text
+### Family: Buyer-facing profile
+- Candidate A: "I help Japanese companies turn AI search into qualified pipeline. Strategy, implementation, and measurement in one sprint."
+- Candidate B: "AI-native GTM and search systems for companies entering Japan."
+
+### Family: Cash-near offer
+- Candidate A: "AI Search Revenue Sprint: 14 days, 5 rewritten pages, query map, dashboard, and implementation calls. Fixed price: $8,000."
+- Candidate B: "Japan AI Search Audit: 48-hour diagnosis, prioritized fixes, and one implementation call. Fixed price: $1,500."
+
+### Family: Launch post
+- Candidate A: "I’m opening 3 slots for founders entering Japan who need AI-search-native GTM, not translated marketing. DM ‘Japan’ and I’ll send the audit format."
+```
 
 ## Distribution Model
 
@@ -84,4 +101,4 @@ This repository intentionally separates:
 - **Website:** `site/`
 - **Optional CLI:** `bin/decision-space-mapper.mjs`
 
-The skill is the distribution layer for the option-mapping product.
+The skill is the distribution layer for the candidate-output product.

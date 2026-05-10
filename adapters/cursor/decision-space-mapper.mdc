@@ -1,43 +1,44 @@
 ---
-description: Map exhaustive options for ambiguous or high-stakes decisions before recommending a path. Use when deciding what to build, sell, write, change, prioritize, avoid, test, or choose.
+description: Generate simulation-ready candidate artifacts for ambiguous or high-stakes decisions before recommending a path. Use when deciding what to publish, build, sell, write, launch, price, position, send, test, or show.
 globs:
 alwaysApply: false
 ---
 
 # Decision Space Mapper
 
-When the user asks for decision options, alternatives, strategy, product direction, positioning, pricing, messaging, or "what else is possible?", map the full decision space before recommending.
+When the user asks for alternatives, product direction, positioning, pricing, messaging, profiles, offers, launch plans, or "what else is possible?", generate the actual world-facing candidates before recommending.
+
+Core rule: if a human or simulation agent could not react to the candidate as a real artifact, the answer is not finished. Do not stop at axes, strategy labels, or abstract directions.
 
 Follow this workflow:
 
-1. Clarify the decision frame: decision, desired outcome, constraints, current options, hidden audience, irreversibility.
-2. Build 3-7 axes that define the space.
-3. Generate obvious, adjacent, inverted, extreme, lazy, asset-building, cash, learning, and no-action options.
-4. Normalize meaningful options into cards:
+1. Clarify the output target: what must exist in the world, desired outcome, constraints, current candidates, hidden audience, irreversibility.
+2. Build 3-7 candidate output families by audience, surface, narrative, offer shape, proof, tone, business model, or constraint.
+3. Under each family, write concrete candidates: profile drafts, offer drafts, landing-page sections, product concepts, launch posts, DM scripts, pricing packages, pitch copy, or no-action artifacts.
+4. Normalize important candidates into cards:
    - Name
-   - One-line version
+   - Candidate output
    - Why it exists
-   - Who/what it depends on
-   - What changes if chosen
-   - What would need to be true
-   - Best use
+   - What it foregrounds
+   - Who it attracts/repels
+   - What changes if used
    - Main risk
 5. Add simulation fields when human reaction matters:
-   - Stimulus
-   - Audience to test
-   - Reaction to observe
+   - Simulation stimulus: the exact text, offer, price, screen, post, profile, or scenario to show
+   - Who needs to react
+   - What to learn: trust, desire, suspicion, willingness to pay, avoidance, shareability, confusion
 6. Surface blind spots explicitly.
-7. Compare without prematurely narrowing to a fake top 3.
-8. End with a simulation brief when the decision depends on human interpretation.
+7. Compare only after the candidate pack exists.
+8. End with the next evidence needed before committing.
 
-Do not invent synthetic-user results. If no simulation tool/API is available, prepare the simulation brief and say what should be simulated.
+Do not invent synthetic-user results. If no simulation tool/API is available, prepare exact stimuli that could be simulated later.
 
 Default output:
 
-1. Decision Frame
-2. Axes
-3. Option Map
+1. Output Target
+2. Candidate Output Families
+3. Candidate Output Pack
 4. Blind Spots Added
 5. Comparison
-6. Simulation Brief
+6. Next Evidence
 7. Next Move

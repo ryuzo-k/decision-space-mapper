@@ -20,6 +20,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+section {
+  scroll-margin-top: 110px;
 }
 
 body {
@@ -274,6 +279,7 @@ pre {
 
 .agents-section,
 .workflow-section,
+.artifact-section,
 .examples-section {
   padding: 86px clamp(18px, 5vw, 72px);
   border-top: 1px solid var(--line);
@@ -347,6 +353,40 @@ pre {
   line-height: 1.55;
 }
 
+.artifact-section {
+  background: #101419;
+}
+
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.artifact-grid article {
+  min-height: 320px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.artifact-grid h3 {
+  margin-top: 12px;
+}
+
+.artifact-copy {
+  margin: 26px 0 0;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.artifact-note {
+  margin: 24px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .examples-section {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(360px, 1fr);
@@ -413,6 +453,10 @@ pre {
 
   .workflow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .artifact-grid {
+    grid-template-columns: 1fr;
   }
 }
 

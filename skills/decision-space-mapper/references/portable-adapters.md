@@ -87,9 +87,10 @@ The user can paste it into system/developer instructions, a project memory file,
 
 Keep the interface stable:
 
-- `decision_frame`
-- `option_cards`
-- `decision_axes`
+- `output_target`
+- `candidate_output_families`
+- `candidate_artifacts`
+- `simulation_stimuli`
 - `blind_spots`
 - `comparison_dimensions`
 - `next_evidence`

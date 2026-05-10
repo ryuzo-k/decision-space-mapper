@@ -13,7 +13,9 @@ Run this command:
 
 ${skillsCommand}
 
-If the command asks which agent to install for, choose the current environment. After installing, verify the skill exists and tell me the exact installed path.`
+If the command asks which agent to install for, choose the current environment. After installing, verify the skill exists and tell me the exact installed path.
+
+Then test it by generating concrete candidate artifacts for a real decision, not abstract advice.`
   },
   "claude-code": {
     kind: "Claude Code",

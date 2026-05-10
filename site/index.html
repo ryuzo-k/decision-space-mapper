@@ -6,7 +6,7 @@
     <title>Decision Space Mapper</title>
     <meta
       name="description"
-      content="A skill for people who do not want to use an AI agent's first answer as-is."
+      content="A skill that makes AI write simulation-ready candidate artifacts before recommending a path."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -19,6 +19,7 @@
       <div class="nav-links">
         <a href="#install">Install</a>
         <a href="#agents">Agents</a>
+        <a href="#output">Output</a>
         <a href="#examples">Examples</a>
       </div>
     </nav>
@@ -26,10 +27,10 @@
     <main>
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">For people who do not want AI's first answer</p>
-          <h1>Make AI generate the actual options.</h1>
+          <p class="eyebrow">For people who do not want abstract AI advice</p>
+          <h1>Make AI write the candidates, not describe them.</h1>
           <p class="lede">
-            Most AI agents turn messy decisions into abstract advice. Decision Space Mapper makes them produce concrete candidates you could publish, ship, send, or test before choosing.
+            Decision Space Mapper makes your agent produce the actual profile drafts, offers, product concepts, launch posts, pricing packages, and other artifacts people can react to before you choose.
           </p>
           <div class="hero-actions">
             <button class="primary-action" id="copy-hero-prompt" type="button">Copy install prompt</button>
@@ -48,7 +49,7 @@
         <div class="installer hero-installer" id="install">
           <div class="installer-top">
             <p class="mini-label">Paste into your agent</p>
-            <h2>Install with the right instruction.</h2>
+            <h2>Copy the installer. Then ask for artifacts.</h2>
           </div>
 
           <div class="agent-tabs" role="tablist" aria-label="Agent installers">
@@ -108,28 +109,58 @@
       <section class="workflow-section" id="workflow">
         <div class="section-heading compact">
           <p class="eyebrow">What the skill does</p>
-          <h2>It turns “give me the answer” into “show me the whole space.”</h2>
+          <h2>It creates the stimuli you can show, test, or simulate.</h2>
         </div>
         <div class="workflow-grid">
           <article>
             <span>01</span>
-            <h3>Frame</h3>
-            <p>Clarify the decision, desired outcome, constraints, current options, hidden audience, and irreversibility.</p>
+            <h3>Target</h3>
+            <p>Identify the thing that must exist in the world: profile, offer, page, post, price, product, pitch, or script.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Group</h3>
-            <p>Create result families by audience, surface, narrative, offer shape, proof, tone, or constraint.</p>
+            <h3>Family</h3>
+            <p>Group candidates by the versions that would create different human reactions, not by abstract strategy labels.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Draft</h3>
-            <p>Generate concrete candidates under each family, not abstract directions or strategy labels.</p>
+            <h3>Write</h3>
+            <p>Draft the actual buyer-facing or audience-facing artifacts under every meaningful family.</p>
           </article>
           <article>
             <span>04</span>
-            <h3>Test</h3>
-            <p>Define what evidence, question, or small experiment would make the decision clearer.</p>
+            <h3>Probe</h3>
+            <p>Name the reaction each artifact needs: trust, desire, suspicion, willingness to pay, confusion, or avoidance.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="artifact-section" id="output">
+        <div class="section-heading compact">
+          <p class="eyebrow">Example output</p>
+          <h2>The deliverable is a pack of artifacts.</h2>
+          <p>
+            A good run gives you concrete candidates that can be copied, shown to people, put into an experiment, or passed into a later simulation.
+          </p>
+        </div>
+        <div class="artifact-grid" aria-label="Example candidate artifacts">
+          <article>
+            <p class="mini-label">Profile family</p>
+            <h3>Buyer-facing</h3>
+            <p class="artifact-copy">“I help Japanese companies turn AI search into qualified pipeline. Strategy, implementation, and measurement in one sprint.”</p>
+            <p class="artifact-note">Reaction to watch: clear buyer fit, trust, willingness to ask for details.</p>
+          </article>
+          <article>
+            <p class="mini-label">Offer family</p>
+            <h3>Cash-near service</h3>
+            <p class="artifact-copy">“AI Search Revenue Sprint: 14 days, 5 rewritten pages, query map, dashboard, and implementation calls. Fixed price: $8,000.”</p>
+            <p class="artifact-note">Reaction to watch: price resistance, perceived specificity, urgency.</p>
+          </article>
+          <article>
+            <p class="mini-label">Launch family</p>
+            <h3>Direct post</h3>
+            <p class="artifact-copy">“I’m opening 3 slots for founders entering Japan who need AI-search-native GTM, not translated marketing. DM ‘Japan’ and I’ll send the audit format.”</p>
+            <p class="artifact-note">Reaction to watch: inbound quality, skepticism, shares, silent saves.</p>
           </article>
         </div>
       </section>
@@ -137,23 +168,23 @@
       <section class="examples-section" id="examples">
         <div class="examples-copy">
           <p class="eyebrow">Use cases</p>
-          <h2>Built for decisions where the missing options are expensive.</h2>
+          <h2>Built for decisions where the missing artifact is expensive.</h2>
           <p>
-            Use it for product direction, positioning, pricing, launch plans, content strategy, offers, profiles, career moves, and other decisions where one narrow AI answer can quietly cost you money.
+            Use it when you need the thing itself, not commentary about the thing. The output should be ready to paste into a post, a sales page, an outreach message, a profile, a deck, or a later simulation run.
           </p>
         </div>
         <div class="example-board" aria-label="Decision examples">
           <div class="example-main">
             <span>01</span>
-            <p>“What should I build next?” becomes concrete product concepts, offers, landing-page angles, and no-build tests.</p>
+            <p>“What should I build next?” becomes named product concepts, buyer promises, first screens, offers, and no-build tests.</p>
           </div>
           <div class="example-main alt">
             <span>02</span>
-            <p>“How should I launch this?” becomes concrete launch posts, DM scripts, waitlist pages, offers, and partner pitches.</p>
+            <p>“How should I launch this?” becomes actual launch posts, DM scripts, waitlist copy, discount terms, and partner pitches.</p>
           </div>
           <div class="example-main warn">
             <span>03</span>
-            <p>“What should my profile say?” becomes actual profile drafts grouped by credibility, audience, tone, and offer.</p>
+            <p>“What should my profile say?” becomes profile drafts a stranger can judge, not advice about sounding credible.</p>
           </div>
         </div>
       </section>
