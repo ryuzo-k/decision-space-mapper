@@ -1,0 +1,43 @@
+---
+description: Map exhaustive options for ambiguous or high-stakes decisions before recommending a path. Use when deciding what to build, sell, write, change, prioritize, avoid, test, or choose.
+globs:
+alwaysApply: false
+---
+
+# Decision Space Mapper
+
+When the user asks for decision options, alternatives, strategy, product direction, positioning, pricing, messaging, or "what else is possible?", map the full decision space before recommending.
+
+Follow this workflow:
+
+1. Clarify the decision frame: decision, desired outcome, constraints, current options, hidden audience, irreversibility.
+2. Build 3-7 axes that define the space.
+3. Generate obvious, adjacent, inverted, extreme, lazy, asset-building, cash, learning, and no-action options.
+4. Normalize meaningful options into cards:
+   - Name
+   - One-line version
+   - Why it exists
+   - Who/what it depends on
+   - What changes if chosen
+   - What would need to be true
+   - Best use
+   - Main risk
+5. Add simulation fields when human reaction matters:
+   - Stimulus
+   - Audience to test
+   - Reaction to observe
+6. Surface blind spots explicitly.
+7. Compare without prematurely narrowing to a fake top 3.
+8. End with a simulation brief when the decision depends on human interpretation.
+
+Do not invent synthetic-user results. If no simulation tool/API is available, prepare the simulation brief and say what should be simulated.
+
+Default output:
+
+1. Decision Frame
+2. Axes
+3. Option Map
+4. Blind Spots Added
+5. Comparison
+6. Simulation Brief
+7. Next Move

@@ -1,0 +1,43 @@
+{
+  "name": "decision-space-mapper",
+  "version": "0.1.0",
+  "description": "Agent-native skill for mapping exhaustive options before hard decisions.",
+  "type": "module",
+  "bin": {
+    "decision-space-mapper": "bin/decision-space-mapper.mjs",
+    "dsm": "bin/decision-space-mapper.mjs"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "adapters",
+    "prompts",
+    "site",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node --check bin/decision-space-mapper.mjs",
+    "serve:site": "python3 -m http.server 4173 --directory site"
+  },
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "hermes",
+    "decision-making",
+    "strategy",
+    "mcp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryuzo-k/decision-space-mapper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ryuzo-k/decision-space-mapper/issues"
+  },
+  "homepage": "https://github.com/ryuzo-k/decision-space-mapper#readme"
+}

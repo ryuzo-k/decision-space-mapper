@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision Space Mapper</title>
+    <meta
+      name="description"
+      content="A skill for people who do not want to use an AI agent's first answer as-is."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Decision Space Mapper home">
+        <span class="brand-mark"></span>
+        <span>Decision Space Mapper</span>
+      </a>
+      <div class="nav-links">
+        <a href="#install">Install</a>
+        <a href="#agents">Agents</a>
+        <a href="#examples">Examples</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">For people who do not want AI's first answer</p>
+          <h1>Keep getting exhaustive answers from your AI.</h1>
+          <p class="lede">
+            Most AI agents collapse messy, intangible decisions into one confident path. Decision Space Mapper makes them expand the option space first, so you can see the alternatives before choosing.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-action" id="copy-hero-prompt" type="button">Copy install prompt</button>
+            <button class="ghost-action" id="copy-skills-command" type="button">Copy skills command</button>
+          </div>
+          <div class="signal-row" aria-label="Supported agent examples">
+            <span>Claude Code</span>
+            <span>Codex</span>
+            <span>Cursor</span>
+            <span>GitHub Copilot</span>
+            <span>Windsurf</span>
+            <span>Gemini CLI</span>
+          </div>
+        </div>
+
+        <div class="installer hero-installer" id="install">
+          <div class="installer-top">
+            <p class="mini-label">Paste into your agent</p>
+            <h2>Install with the right instruction.</h2>
+          </div>
+
+          <div class="agent-tabs" role="tablist" aria-label="Agent installers">
+            <button class="agent-tab is-active" type="button" data-agent="auto" role="tab" aria-selected="true">Auto</button>
+            <button class="agent-tab" type="button" data-agent="claude-code" role="tab" aria-selected="false">Claude</button>
+            <button class="agent-tab" type="button" data-agent="codex" role="tab" aria-selected="false">Codex</button>
+            <button class="agent-tab" type="button" data-agent="cursor" role="tab" aria-selected="false">Cursor</button>
+            <button class="agent-tab" type="button" data-agent="github-copilot" role="tab" aria-selected="false">Copilot</button>
+            <button class="agent-tab" type="button" data-agent="windsurf" role="tab" aria-selected="false">Windsurf</button>
+            <button class="agent-tab" type="button" data-agent="gemini" role="tab" aria-selected="false">Gemini</button>
+            <button class="agent-tab" type="button" data-agent="cline" role="tab" aria-selected="false">Cline</button>
+            <button class="agent-tab" type="button" data-agent="amp" role="tab" aria-selected="false">Amp</button>
+            <button class="agent-tab" type="button" data-agent="generic" role="tab" aria-selected="false">Generic</button>
+          </div>
+
+          <div class="prompt-panel">
+            <div class="prompt-meta">
+              <div>
+                <p class="mini-label" id="agent-kind">skills.sh auto-detect</p>
+                <h3 id="agent-title">Install for the current agent</h3>
+              </div>
+              <button id="copy-agent-prompt" type="button">Copy</button>
+            </div>
+            <pre><code id="agent-prompt"></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="agents-section" id="agents">
+        <div class="section-heading">
+          <p class="eyebrow">Not five agents</p>
+          <h2>Designed to ride the open skills ecosystem.</h2>
+          <p>
+            The repo uses a standard <code>skills/decision-space-mapper/SKILL.md</code> layout so it can be installed by the open skills CLI and adapted by agents that support Skill-style workflows.
+          </p>
+        </div>
+        <div class="agent-cloud" aria-label="Supported agents">
+          <span>Claude Code</span>
+          <span>Codex</span>
+          <span>Cursor</span>
+          <span>GitHub Copilot</span>
+          <span>Windsurf</span>
+          <span>Gemini CLI</span>
+          <span>Cline</span>
+          <span>Amp</span>
+          <span>Antigravity</span>
+          <span>Goose</span>
+          <span>OpenCode</span>
+          <span>Roo</span>
+          <span>Trae</span>
+          <span>VS Code</span>
+          <span>Hermes</span>
+          <span>Generic agents</span>
+        </div>
+      </section>
+
+      <section class="workflow-section" id="workflow">
+        <div class="section-heading compact">
+          <p class="eyebrow">What the skill does</p>
+          <h2>It turns “give me the answer” into “show me the whole space.”</h2>
+        </div>
+        <div class="workflow-grid">
+          <article>
+            <span>01</span>
+            <h3>Frame</h3>
+            <p>Clarify the decision, desired outcome, constraints, current options, hidden audience, and irreversibility.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Expand</h3>
+            <p>Generate obvious, adjacent, inverted, extreme, lazy, cash, asset, learning, and no-action options.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Normalize</h3>
+            <p>Turn each meaningful path into a clean option card that can be compared or shown to agents later.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Test</h3>
+            <p>Define what evidence, question, or small experiment would make the decision clearer.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="examples-section" id="examples">
+        <div class="examples-copy">
+          <p class="eyebrow">Use cases</p>
+          <h2>Built for decisions where the missing options are expensive.</h2>
+          <p>
+            Use it for product direction, positioning, pricing, launch plans, content strategy, offers, career moves, and other intangible decisions where one narrow AI answer can quietly cost you money.
+          </p>
+        </div>
+        <div class="example-board" aria-label="Decision examples">
+          <div class="example-main">
+            <span>01</span>
+            <p>“What should I build next?” becomes a map of wedges, services, content loops, APIs, and no-build tests.</p>
+          </div>
+          <div class="example-main alt">
+            <span>02</span>
+            <p>“How should I launch this?” becomes a map of public, private, partner-led, paid, manual, and waitlist paths.</p>
+          </div>
+          <div class="example-main warn">
+            <span>03</span>
+            <p>“What am I missing?” becomes explicit axes, blind spots, rejected assumptions, and next evidence.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./main.js"></script>
+  </body>
+</html>
