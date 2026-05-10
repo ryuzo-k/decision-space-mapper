@@ -1,10 +1,12 @@
-# Decision Space Mapper
+# 土台 / Decision Foundation
 
 [![skills.sh](https://skills.sh/b/ryuzo-k/decision-space-mapper)](https://skills.sh/ryuzo-k/decision-space-mapper)
 
-For people who do not want to use an AI agent's first answer as-is.
+網羅的な選択肢を提示し、適切な意思決定を行う土台をつくる。
 
-Decision Space Mapper is an agent-native skill/protocol for Claude Code, Codex, Hermes Agent, Cursor, and generic AI agents. It makes an AI extract the options already latent in your context, expand the missing alternatives, and package them as coherent candidate paths before it recommends one.
+Decision Foundation is an agent-native skill/protocol for Claude Code, Codex, Hermes Agent, Cursor, and generic AI agents. It makes an AI extract the options already latent in your context, expand the missing alternatives, and package them as coherent candidate paths before it recommends one.
+
+The installable skill id remains `decision-space-mapper`.
 
 It is intentionally not a taste engine. For surfaces like profiles, launch posts, landing pages, and personal positioning, the skill maps viable paths, ingredients, action norms, inclusion/exclusion choices, and reactions to test instead of writing polished copy by default.
 

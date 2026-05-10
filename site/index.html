@@ -3,192 +3,71 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Decision Space Mapper</title>
+    <title>Decision Foundation</title>
     <meta
       name="description"
-      content="A free agent skill that maps coherent candidate paths from messy decision context before recommending one."
+      content="A free agent skill that maps every viable path before you make a decision."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <nav class="topbar" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Decision Space Mapper home">
+      <a class="brand" href="#top" aria-label="Decision Foundation home">
         <span class="brand-mark"></span>
-        <span>Decision Space Mapper</span>
+        <span>Decision Foundation</span>
       </a>
       <div class="nav-links">
         <a href="#install">Install</a>
-        <a href="#agents">Agents</a>
-        <a href="#output">Map</a>
-        <a href="#examples">Examples</a>
+        <a href="#demo">Demo</a>
+        <a href="#simulation">Simulation</a>
       </div>
     </nav>
 
     <main>
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">For people who do not want AI's first answer</p>
-          <h1>Make AI map the paths you could actually choose.</h1>
+          <p class="eyebrow">Free agent skill</p>
+          <h1>See every viable path before you decide.</h1>
           <p class="lede">
-            A free agent skill that extracts the options hidden in your messy context, expands the missing alternatives, and turns them into coherent action patterns.
+            Decision Foundation turns messy context into comprehensive candidate paths, giving you the ground for better decisions instead of one narrow AI answer.
           </p>
-          <div class="hero-actions">
-            <button class="primary-action" id="copy-hero-prompt" type="button">Copy install prompt</button>
-            <button class="ghost-action" id="copy-skills-command" type="button">Copy skills command</button>
-          </div>
-          <div class="signal-row" aria-label="Product signals and supported agent examples">
-            <span>Free skill</span>
-            <span>Source-grounded</span>
-            <span>Path-first</span>
-            <span>Claude Code</span>
-            <span>Codex</span>
-            <span>Cursor</span>
-          </div>
         </div>
 
-        <div class="installer hero-installer" id="install">
-          <div class="installer-top">
-            <p class="mini-label">Paste into your agent</p>
-            <h2>Copy the installer. Then ask for candidate paths.</h2>
-          </div>
-
-          <div class="agent-tabs" role="tablist" aria-label="Agent installers">
-            <button class="agent-tab is-active" type="button" data-agent="auto" role="tab" aria-selected="true">Auto</button>
-            <button class="agent-tab" type="button" data-agent="claude-code" role="tab" aria-selected="false">Claude</button>
-            <button class="agent-tab" type="button" data-agent="codex" role="tab" aria-selected="false">Codex</button>
-            <button class="agent-tab" type="button" data-agent="cursor" role="tab" aria-selected="false">Cursor</button>
-            <button class="agent-tab" type="button" data-agent="github-copilot" role="tab" aria-selected="false">Copilot</button>
-            <button class="agent-tab" type="button" data-agent="windsurf" role="tab" aria-selected="false">Windsurf</button>
-            <button class="agent-tab" type="button" data-agent="gemini" role="tab" aria-selected="false">Gemini</button>
-            <button class="agent-tab" type="button" data-agent="cline" role="tab" aria-selected="false">Cline</button>
-            <button class="agent-tab" type="button" data-agent="amp" role="tab" aria-selected="false">Amp</button>
-            <button class="agent-tab" type="button" data-agent="generic" role="tab" aria-selected="false">Generic</button>
-          </div>
-
-          <div class="prompt-panel">
-            <div class="prompt-meta">
-              <div>
-                <p class="mini-label" id="agent-kind">skills.sh auto-detect</p>
-                <h3 id="agent-title">Install for the current agent</h3>
-              </div>
-              <button id="copy-agent-prompt" type="button">Copy</button>
+        <div class="install-card" id="install">
+          <div class="install-card-top">
+            <div>
+              <p class="mini-label">Auto install</p>
+              <h2>Paste this into your AI agent.</h2>
             </div>
-            <pre><code id="agent-prompt"></code></pre>
+            <button id="copy-install-prompt" type="button">Copy</button>
           </div>
+          <pre><code id="install-prompt"></code></pre>
+          <button class="command-button" id="copy-skills-command" type="button">Copy command only</button>
         </div>
       </section>
 
-      <section class="agents-section" id="agents">
-        <div class="section-heading">
-          <p class="eyebrow">Not five agents</p>
-          <h2>Designed to ride the open skills ecosystem.</h2>
+      <section class="demo-section" id="demo">
+        <div class="section-copy">
+          <p class="eyebrow">Demo</p>
+          <h2>Show the skill on a real decision.</h2>
+        </div>
+        <div class="video-frame">
+          <span>Usage video</span>
+        </div>
+      </section>
+
+      <section class="simulation-section" id="simulation">
+        <div class="section-copy">
+          <p class="eyebrow">Connected workflow</p>
+          <h2>When the choice depends on people, simulate the reaction.</h2>
           <p>
-            The repo uses a standard <code>skills/decision-space-mapper/SKILL.md</code> layout so it can be installed by the open skills CLI and adapted by agents that support Skill-style workflows.
+            If a path involves selling, showing, pitching, publishing, or persuading, the option map becomes the input for simulation: who trusts it, who wants it, who hesitates, and why.
           </p>
         </div>
-        <div class="agent-cloud" aria-label="Supported agents">
-          <span>Claude Code</span>
-          <span>Codex</span>
-          <span>Cursor</span>
-          <span>GitHub Copilot</span>
-          <span>Windsurf</span>
-          <span>Gemini CLI</span>
-          <span>Cline</span>
-          <span>Amp</span>
-          <span>Antigravity</span>
-          <span>Goose</span>
-          <span>OpenCode</span>
-          <span>Roo</span>
-          <span>Trae</span>
-          <span>VS Code</span>
-          <span>Hermes</span>
-          <span>Generic agents</span>
-        </div>
-      </section>
-
-      <section class="workflow-section" id="workflow">
-        <div class="section-heading compact">
-          <p class="eyebrow">What the skill does</p>
-          <h2>It turns messy thinking into candidate paths.</h2>
-        </div>
-        <div class="workflow-grid">
-          <article>
-            <span>01</span>
-            <h3>Extract</h3>
-            <p>Pull out the user's current options, ingredients, constraints, tensions, and disliked directions.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Target</h3>
-            <p>If the goal is ambiguous, identify the possible decision targets before mapping the wrong thing.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Path</h3>
-            <p>Bundle the ingredients into coherent paths with purpose, audience, foreground, and action norms.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Bridge</h3>
-            <p>Mark which paths need human reaction, interviews, market tests, or future simulation.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="artifact-section" id="output">
-        <div class="section-heading compact">
-          <p class="eyebrow">Example output</p>
-          <h2>The deliverable is paths, not loose categories.</h2>
-          <p>
-            A good run keeps the user's original thinking visible, then turns fragments into realistic directions the user could actually choose.
-          </p>
-        </div>
-        <div class="artifact-grid" aria-label="Example path map">
-          <article>
-            <p class="mini-label">Source inventory</p>
-            <h3>User material first</h3>
-            <p class="artifact-copy">AI search, AI-native agency, TryMind, Japan GTM, credentials, age, trust risk, boredom with boring services.</p>
-            <p class="artifact-note">The skill starts by preserving what the user already said.</p>
-          </article>
-          <article>
-            <p class="mini-label">Candidate path</p>
-            <h3>Business acquisition profile</h3>
-            <p class="artifact-copy">Purpose, buyer, foreground, de-emphasis, action norm, proof assets, and risk to test.</p>
-            <p class="artifact-note">The skill maps a direction before anyone writes final copy.</p>
-          </article>
-          <article>
-            <p class="mini-label">Simulation bridge</p>
-            <h3>What to test later</h3>
-            <p class="artifact-copy">Trust, suspicion, memorability, willingness to contact, and which audience each path attracts or repels.</p>
-            <p class="artifact-note">The free skill creates clean inputs for deeper simulation workflows.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="examples-section" id="examples">
-        <div class="examples-copy">
-          <p class="eyebrow">Use cases</p>
-          <h2>Built for decisions where missing options are expensive.</h2>
-          <p>
-            Use it before product decisions, positioning, pricing, launch planning, content strategy, profiles, offers, and other choices where one narrow AI answer can quietly cost you money.
-          </p>
-        </div>
-        <div class="example-board" aria-label="Decision examples">
-          <div class="example-main">
-            <span>01</span>
-            <p>“What should I build next?” becomes candidate business paths with model, audience, wedge, distribution, and learning loop.</p>
-          </div>
-          <div class="example-main alt">
-            <span>02</span>
-            <p>“How should I launch this?” becomes launch paths: X-first, Reddit-first, DM-first, video-first, partner-first, or waitlist-first.</p>
-          </div>
-          <div class="example-main warn">
-            <span>03</span>
-            <p>“What should my profile say?” becomes profile paths: business account, full self, artist-founder, AI-native operator, or single-purpose account.</p>
-          </div>
-        </div>
+        <a class="simulation-link" href="#install">Build the decision foundation first</a>
       </section>
     </main>
+
     <script src="./main.js"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@ name: decision-space-mapper
 description: Map coherent candidate paths from a user's messy decision context before recommending a path. Use when a user is deciding what to build, sell, write, publish, position, price, prioritize, launch, include, exclude, test, or choose; when they ask for exhaustive options, alternatives, overlooked paths, "what else is possible?", product/business/career strategy, positioning, pricing, messaging, profile/self-presentation, or a structured set of action patterns to prepare for later human or agent simulation.
 ---
 
-# Decision Space Mapper
+# Decision Foundation
 
 ## Purpose
 
