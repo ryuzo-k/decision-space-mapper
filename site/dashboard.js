@@ -128,6 +128,7 @@ async function runSimulation() {
         artifact: { type: "product_or_content", content: $("#artifact").value },
         audience: { description: $("#audience").value },
         simulation: {
+          mode: $("#mode").value,
           target_n: Number($("#target-n").value),
           max_agent_voices: Number($("#voice-limit").value),
           max_output_tokens: 30000
@@ -224,6 +225,7 @@ function loadSample() {
   $("#artifact").value = "An API that simulates how likely human audiences would react to a product, profile, offer, or content artifact. It returns many realistic private voices and aggregate patterns for better decisions.";
   $("#target-n").value = 40;
   $("#voice-limit").value = 8;
+  $("#mode").value = "fast";
 }
 
 async function api(path, options = {}) {

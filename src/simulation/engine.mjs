@@ -1,6 +1,16 @@
 const DEFAULT_MAX_N = 1000;
 const DEFAULT_RETURN_LIMIT = 80;
 const DEFAULT_LLM_RETURN_LIMIT = 24;
+const DEFAULT_BATCH_CONCURRENCY = 4;
+const canonicalReactionAngles = [
+  "quiet_conversion",
+  "desire_with_reservation",
+  "specific_confusion",
+  "private_suspicion",
+  "intellectual_interest",
+  "status_reaction",
+  "dismissal"
+];
 
 const archetypes = [
   {
@@ -288,6 +298,19 @@ export async function simulateReactionWithLlm(input = {}) {
   const model = input.simulation?.model || process.env.OPENAI_MODEL || "gpt-4.1-mini";
   const requestedOutputTokens = Number(input.simulation?.max_output_tokens || process.env.OPENAI_MAX_OUTPUT_TOKENS || 30000);
   const maxOutputTokens = Math.max(requestedOutputTokens, 16000);
+  const strategy = input.simulation?.strategy || input.simulation?.engine || process.env.SIMULATION_ENGINE || "batch";
+
+  if (strategy !== "single") {
+    return simulateReactionBatched({
+      apiKey,
+      model,
+      normalized,
+      input,
+      requestedN,
+      returnedVoices,
+      maxOutputTokens
+    });
+  }
 
   const body = await callOpenAiReactionSimulation({
     apiKey,
@@ -331,6 +354,319 @@ export async function simulateReactionWithLlm(input = {}) {
       note: parsed.simulation_design?.note || "These are synthetic human voices for decision support. They are not a substitute for real interviews, sales calls, or live market data."
     }
   };
+}
+
+async function simulateReactionBatched({ apiKey, model, normalized, input, requestedN, returnedVoices, maxOutputTokens }) {
+  const mode = resolveSimulationMode(input, requestedN);
+  const plan = buildAudiencePlan(normalized, requestedN, mode);
+  const batches = buildVoiceBatches(plan, mode);
+  const concurrency = clamp(Number(input.simulation?.concurrency || process.env.SIMULATION_BATCH_CONCURRENCY || DEFAULT_BATCH_CONCURRENCY), 1, 8);
+  const batchResults = await runWithConcurrency(batches, concurrency, (batch) => callOpenAiVoiceBatch({
+    apiKey,
+    model,
+    normalized,
+    batch,
+    mode,
+    maxOutputTokens: outputTokensForBatch(input, maxOutputTokens, batch.count)
+  }));
+  const agents = batchResults.flatMap((result) => result.agent_voices || []).slice(0, requestedN);
+  const voiceClusters = clusterVoices(agents).slice(0, 12);
+
+  return {
+    id: `sim_batch_${Date.now()}`,
+    object: {
+      type: normalized.artifact.type,
+      objective: normalized.objective,
+      audience: normalized.audience.description
+    },
+    simulation_design: {
+      requested_n: requestedN,
+      simulated_n: agents.length,
+      backend: "openai_responses_batched",
+      model,
+      mode,
+      batches: batches.length,
+      batch_concurrency: concurrency,
+      n_reason: explainN(normalized, requestedN),
+      audience_construction: describeBatchedAudienceConstruction(plan),
+      note: "These are synthetic human voices for decision support. They are not a substitute for real interviews, sales calls, or live market data."
+    },
+    reaction_distribution: summarizeDistribution(agents),
+    voice_clusters: voiceClusters,
+    agent_voices: agents.slice(0, returnedVoices),
+    omitted_agent_voices: Math.max(0, agents.length - returnedVoices),
+    next_simulation_inputs: suggestNextInputs(normalized, voiceClusters)
+  };
+}
+
+function resolveSimulationMode(input, requestedN) {
+  const explicit = String(input.simulation?.mode || input.mode || "").toLowerCase();
+  if (["fast", "standard", "deep", "report"].includes(explicit)) return explicit;
+  if (requestedN <= 40) return "fast";
+  if (requestedN <= 160) return "standard";
+  if (requestedN <= 400) return "deep";
+  return "report";
+}
+
+function buildAudiencePlan(input, requestedN, mode) {
+  const weighted = archetypes
+    .map((archetype) => ({
+      id: archetype.id,
+      label: archetype.label,
+      weight: tuneShare(archetype, input),
+      context: archetype.contexts[0],
+      motive: archetype.motives[0],
+      friction: archetype.frictions[0]
+    }))
+    .sort((a, b) => b.weight - a.weight);
+  const segmentCount = mode === "fast" ? 4 : mode === "standard" ? 6 : 8;
+  const selected = weighted.slice(0, segmentCount);
+  const total = selected.reduce((sum, segment) => sum + segment.weight, 0);
+  let assigned = 0;
+  const segments = selected.map((segment, index) => {
+    const isLast = index === selected.length - 1;
+    const count = isLast ? requestedN - assigned : Math.max(1, Math.round((segment.weight / total) * requestedN));
+    assigned += count;
+    return {
+      ...segment,
+      share: Number((count / requestedN).toFixed(3)),
+      count
+    };
+  });
+
+  return { mode, requestedN, segments };
+}
+
+function buildVoiceBatches(plan, mode) {
+  const maxBatchSize = mode === "fast" ? 12 : mode === "standard" ? 20 : 30;
+  const batches = [];
+  let batchIndex = 0;
+  for (const segment of plan.segments) {
+    let remaining = segment.count;
+    while (remaining > 0) {
+      const count = Math.min(maxBatchSize, remaining);
+      batches.push({
+        id: `batch_${String(batchIndex + 1).padStart(3, "0")}`,
+        count,
+        segment
+      });
+      batchIndex += 1;
+      remaining -= count;
+    }
+  }
+  return batches;
+}
+
+async function callOpenAiVoiceBatch({ apiKey, model, normalized, batch, mode, maxOutputTokens }) {
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      "authorization": `Bearer ${apiKey}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      model,
+      instructions: voiceBatchInstructions(),
+      input: JSON.stringify({
+        artifact: normalized.artifact,
+        objective: normalized.objective,
+        audience: normalized.audience,
+        reaction_dimensions: normalized.dimensions,
+        mode,
+        batch: {
+          id: batch.id,
+          count: batch.count,
+          segment: batch.segment
+        }
+      }, null, 2),
+      text: {
+        format: {
+          type: "json_schema",
+          name: "reaction_voice_batch",
+          strict: false,
+          schema: voiceBatchSchema()
+        },
+        verbosity: "medium"
+      },
+      max_output_tokens: maxOutputTokens
+    })
+  });
+
+  const body = await response.json().catch(() => null);
+  if (!response.ok) {
+    const message = body?.error?.message || `OpenAI API request failed with HTTP ${response.status}.`;
+    throw new Error(message);
+  }
+  if (body?.status === "incomplete") {
+    throw new Error(`OpenAI voice batch returned incomplete JSON (${body.incomplete_details?.reason || "unknown reason"}).`);
+  }
+  const outputText = extractOutputText(body);
+  if (!outputText) throw new Error("OpenAI voice batch returned no output_text.");
+  try {
+    const parsed = JSON.parse(outputText);
+    return {
+      ...parsed,
+      agent_voices: normalizeBatchVoices(parsed.agent_voices || [], batch)
+    };
+  } catch (error) {
+    throw new Error(`OpenAI voice batch returned non-JSON output: ${error.message}`);
+  }
+}
+
+function normalizeBatchVoices(voices, batch) {
+  return Array.from({ length: batch.count }, (_, index) => {
+    const voice = voices[index] || {};
+    const fallback = fallbackBatchVoice(batch, index);
+    return {
+    id: voice.id || `${batch.id}_agent_${String(index + 1).padStart(3, "0")}`,
+    archetype_id: batch.segment.id,
+    human_dossier: {
+      surface_identity: voice.human_dossier?.surface_identity || fallback.human_dossier.surface_identity,
+      deeper_context: voice.human_dossier?.deeper_context || fallback.human_dossier.deeper_context,
+      private_motive: voice.human_dossier?.private_motive || fallback.human_dossier.private_motive,
+      social_mask: voice.human_dossier?.social_mask || "publicly polite, privately selective",
+      money_reality: voice.human_dossier?.money_reality || "will only pay if the artifact connects to a live problem",
+      status_pressure: voice.human_dossier?.status_pressure || "does not want to look naive for trying another AI tool",
+      past_experience: voice.human_dossier?.past_experience || "has seen several AI tools overpromise",
+      friction: voice.human_dossier?.friction || fallback.human_dossier.friction
+    },
+    reaction: {
+      first_impression: voice.reaction?.first_impression || fallback.reaction.first_impression,
+      inner_voice: voice.reaction?.inner_voice || fallback.reaction.inner_voice,
+      felt_but_may_not_say: voice.reaction?.felt_but_may_not_say || fallback.reaction.felt_but_may_not_say,
+      likely_action: voice.reaction?.likely_action || fallback.reaction.likely_action,
+      action_probability: Number(voice.reaction?.action_probability ?? 0.4),
+      emotional_intensity: Number(voice.reaction?.emotional_intensity ?? 0.5),
+      reaction_angle: normalizeReactionAngle(voice.reaction?.reaction_angle || fallback.reaction.reaction_angle)
+    }
+  };
+  });
+}
+
+function fallbackBatchVoice(batch, index) {
+  return {
+    human_dossier: {
+      surface_identity: `${batch.segment.label} respondent ${index + 1}`,
+      deeper_context: batch.segment.context,
+      private_motive: batch.segment.motive,
+      friction: batch.segment.friction
+    },
+    reaction: {
+      first_impression: "The artifact is interesting, but they need one concrete example before trusting it.",
+      inner_voice: "I can see the use, but I am checking whether this is real or just another polished AI claim. Show me one result on something messy and I would know quickly.",
+      felt_but_may_not_say: "I do not want to look naive for trying another AI tool that only sounds impressive.",
+      likely_action: "waits for a concrete example or sends a low-risk sample",
+      reaction_angle: "desire_with_reservation"
+    }
+  };
+}
+
+function normalizeReactionAngle(value) {
+  const raw = String(value || "").toLowerCase().trim();
+  if (canonicalReactionAngles.includes(raw)) return raw;
+  if (/convert|buy|reply|send|trial|try|contact/.test(raw)) return "quiet_conversion";
+  if (/desire|interested|curious|reservation|cautious|optimistic/.test(raw)) return "desire_with_reservation";
+  if (/confus|unclear|understand|vague/.test(raw)) return "specific_confusion";
+  if (/suspicion|skeptic|doubt|trust|proof/.test(raw)) return "private_suspicion";
+  if (/intellectual|fascinat|concept|think/.test(raw)) return "intellectual_interest";
+  if (/status|early|smart|taste|share/.test(raw)) return "status_reaction";
+  return "dismissal";
+}
+
+function voiceBatchInstructions() {
+  return `You generate one small batch of synthetic human reactions for a reaction simulation API.
+
+Output JSON only.
+Return exactly the requested number of agent_voices.
+Do not summarize clusters. Do not write a report.
+Each voice must feel like one plausible person's private reaction after seeing the artifact.
+Avoid consultant language, generic personas, fake precision, and marketing copy.
+Make the voices specific, human, internally coherent, and varied inside the given segment.
+Use natural private thought: uncertainty, annoyance, money pressure, status anxiety, curiosity, fatigue, and concrete next action.
+reaction.reaction_angle must be exactly one of:
+- quiet_conversion
+- desire_with_reservation
+- specific_confusion
+- private_suspicion
+- intellectual_interest
+- status_reaction
+- dismissal
+The output will be merged with other batches and reduced locally.`;
+}
+
+function voiceBatchSchema() {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["batch_id", "agent_voices"],
+    properties: {
+      batch_id: { type: "string" },
+      agent_voices: {
+        type: "array",
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: ["id", "human_dossier", "reaction"],
+          properties: {
+            id: { type: "string" },
+            human_dossier: {
+              type: "object",
+              additionalProperties: false,
+              required: ["surface_identity", "deeper_context", "private_motive", "friction"],
+              properties: {
+                surface_identity: { type: "string" },
+                deeper_context: { type: "string" },
+                private_motive: { type: "string" },
+                friction: { type: "string" }
+              }
+            },
+            reaction: {
+              type: "object",
+              additionalProperties: false,
+              required: ["first_impression", "inner_voice", "felt_but_may_not_say", "likely_action", "action_probability", "emotional_intensity", "reaction_angle"],
+              properties: {
+                first_impression: { type: "string" },
+                inner_voice: { type: "string" },
+                felt_but_may_not_say: { type: "string" },
+                likely_action: { type: "string" },
+                action_probability: { type: "number" },
+                emotional_intensity: { type: "number" },
+                reaction_angle: {
+                  type: "string",
+                  enum: canonicalReactionAngles
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+}
+
+async function runWithConcurrency(items, concurrency, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await worker(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
+function outputTokensForBatch(input, maxOutputTokens, count) {
+  const explicit = Number(input.simulation?.batch_max_output_tokens || 0);
+  if (explicit > 0) return explicit;
+  return clamp(Math.min(maxOutputTokens, 7000 + count * 800), 9000, 26000);
+}
+
+function describeBatchedAudienceConstruction(plan) {
+  const segments = plan.segments.map((segment) => `${segment.count} ${segment.label}`).join("; ");
+  return `Audience was split into ${plan.segments.length} synthetic segments before parallel voice generation: ${segments}.`;
 }
 
 async function callOpenAiReactionSimulation({ apiKey, model, normalized, requestedN, returnedVoices, maxOutputTokens }) {
@@ -617,6 +953,14 @@ function buildPopulation(input, random) {
 function tuneShare(archetype, input) {
   const text = `${input.artifact.content} ${input.objective} ${input.audience.description}`.toLowerCase();
   let weight = archetype.baseShare;
+  const technicalScene = /(technical|developer|engineer|api|ai|agent|claude|codex|cursor|openclaw|hermes|x|twitter|founder|builder|indie|startup|devtool|開発|エンジニア|技術|エージェント)/i.test(text);
+  const buyerScene = /(buy|purchase|sales|price|pricing|sell|revenue|smb|small business|operator|agency|client|売|購買|問い合わせ|営業|法人|中小企業)/i.test(text);
+  if (technicalScene) {
+    if (["taste_sensitive_builder", "skeptical_peer", "curious_nonbuyer"].includes(archetype.id)) weight += 0.16;
+    if (["quiet_high_intent_buyer", "identity_resonant_follower"].includes(archetype.id)) weight += 0.08;
+    if (archetype.id === "cash_near_operator" && !buyerScene) weight *= 0.45;
+    if (archetype.id === "risk_averse_decider" && !buyerScene) weight *= 0.65;
+  }
   if (/(buy|purchase|sales|price|pricing|売|購買|問い合わせ)/i.test(text) && archetype.id.includes("buyer")) weight += 0.08;
   if (/(profile|x|twitter|プロフィール|投稿|content|コンテンツ)/i.test(text) && archetype.id.includes("follower")) weight += 0.08;
   if (/(founder|builder|ai|agent|開発|プロダクト)/i.test(text) && archetype.id.includes("builder")) weight += 0.08;
@@ -722,7 +1066,7 @@ function summarizeDistribution(agents) {
 function clusterVoices(agents) {
   const grouped = new Map();
   for (const agent of agents) {
-    const key = `${agent.human_dossier.surface_identity.split(" ").slice(-2).join(" ")}:${agent.reaction.reaction_angle}`;
+    const key = `${agent.archetype_id || agent.human_dossier.surface_identity.split(" ").slice(-2).join(" ")}:${agent.reaction.reaction_angle}`;
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(agent);
   }

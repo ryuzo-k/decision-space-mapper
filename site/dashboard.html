@@ -150,7 +150,16 @@
             <label>Audience <textarea id="audience">Indie hackers, AI tool builders, agency owners, startup founders, and operators who already use Claude Code, Codex, Cursor, or other agentic coding tools.</textarea></label>
             <label>Artifact <textarea id="artifact">An API that simulates how likely human audiences would react to a product, profile, offer, or content artifact. It returns many realistic private voices and aggregate patterns for better decisions.</textarea></label>
             <div class="grid-2">
+              <label>Mode
+                <select id="mode">
+                  <option value="fast">Fast</option>
+                  <option value="standard">Standard</option>
+                  <option value="deep">Deep</option>
+                </select>
+              </label>
               <label>Simulated people <input id="target-n" type="number" min="12" max="1000" value="40" /></label>
+            </div>
+            <div class="grid-2">
               <label>Representative voices shown <input id="voice-limit" type="number" min="8" max="40" value="8" /></label>
             </div>
             <div class="row">

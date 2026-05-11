@@ -55,6 +55,7 @@ curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
       "description": "Describe the people likely to see it."
     },
     "simulation": {
+      "mode": "fast",
       "target_n": 40,
       "max_agent_voices": 8,
       "max_output_tokens": 30000
@@ -111,10 +112,12 @@ curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID?f
 
 Use:
 
-- `target_n: 40` for fast first-pass checks.
-- `target_n: 120` for serious launch/content decisions.
-- `target_n: 300` for deeper comparison.
-- `target_n: 1000` for report-grade synthetic coverage.
+- `mode: "fast", target_n: 40` for first-pass checks.
+- `mode: "standard", target_n: 120` for serious launch/content decisions.
+- `mode: "deep", target_n: 300` for deeper comparison.
+- `mode: "report", target_n: 1000` for report-grade synthetic coverage.
+
+The default engine uses parallel voice batches and then reduces the batches into a distribution and voice clusters. Use `simulation.strategy: "single"` only for debugging the old one-shot engine.
 
 Credit use:
 
