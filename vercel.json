@@ -12,6 +12,14 @@
   "rewrites": [
     {
       "source": "/",
+      "destination": "/site/simulation.html"
+    },
+    {
+      "source": "/decision-foundation",
+      "destination": "/site/index.html"
+    },
+    {
+      "source": "/decision-foundation.html",
       "destination": "/site/index.html"
     },
     {
