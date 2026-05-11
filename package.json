@@ -43,5 +43,8 @@
   "bugs": {
     "url": "https://github.com/ryuzo-k/decision-space-mapper/issues"
   },
-  "homepage": "https://ryuzo-k.github.io/decision-space-mapper/"
+  "homepage": "https://ryuzo-k.github.io/decision-space-mapper/",
+  "dependencies": {
+    "@vercel/functions": "^3.5.1"
+  }
 }

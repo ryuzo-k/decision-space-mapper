@@ -24,7 +24,17 @@ export default async function handler(request, response) {
       return;
     }
 
-    const format = String(request.query?.format || "json").toLowerCase();
+    const format = String(request.query?.format || "").toLowerCase();
+    if ((format === "markdown" || format === "md") && row.status !== "completed") {
+      response.status(202).json({
+        id: row.id,
+        status: row.status,
+        error: row.error,
+        message: "Simulation is not completed yet."
+      });
+      return;
+    }
+
     if (format === "markdown" || format === "md") {
       const markdown = toMarkdown(row);
       response.setHeader("content-type", "text/markdown; charset=utf-8");
@@ -33,9 +43,30 @@ export default async function handler(request, response) {
       return;
     }
 
+    if (format === "json") {
+      response.setHeader("content-type", "application/json; charset=utf-8");
+      response.setHeader("content-disposition", `attachment; filename=\"simulation-${row.id}.json\"`);
+      response.status(200).json(row);
+      return;
+    }
+
     response.setHeader("content-type", "application/json; charset=utf-8");
-    response.setHeader("content-disposition", `attachment; filename=\"simulation-${row.id}.json\"`);
-    response.status(200).json(row);
+    response.status(200).json({
+      id: row.id,
+      status: row.status,
+      artifact_type: row.artifact_type,
+      objective: row.objective,
+      requested_n: row.requested_n,
+      credits_charged: row.credits_charged,
+      error: row.error,
+      created_at: row.created_at,
+      completed_at: row.completed_at,
+      result: row.result,
+      downloads: row.status === "completed" ? {
+        json: `/api/simulations/${row.id}?format=json`,
+        markdown: `/api/simulations/${row.id}?format=markdown`
+      } : null
+    });
   } catch (error) {
     response.status(400).json({ error: error.message });
   }

@@ -39,7 +39,7 @@ Set:
 export AGENT_SIMULATION_API_KEY="sim_..."
 ```
 
-Call:
+Create a simulation job:
 
 ```bash
 curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
@@ -56,22 +56,44 @@ curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
     },
     "simulation": {
       "target_n": 40,
-      "max_agent_voices": 8
+      "max_agent_voices": 8,
+      "max_output_tokens": 30000
     }
   }'
+```
+
+The endpoint returns immediately:
+
+```json
+{
+  "simulation_id": "SIMULATION_ID",
+  "status": "queued",
+  "polling": {
+    "url": "/api/simulations/SIMULATION_ID",
+    "recommended_interval_ms": 3000
+  }
+}
+```
+
+Poll until `status` is `completed`:
+
+```bash
+curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY"
 ```
 
 ## Response
 
 Important fields:
 
-- `reaction_distribution`: percentage and count for each reaction type.
-- `voice_clusters`: the core output; similar private voices grouped together.
-- `agent_voices`: representative individual dossiers and reactions.
-- `simulation_id`: saved result id.
-- `downloads.markdown`: URL path to export Markdown.
-- `downloads.json`: URL path to export JSON.
-- `billing.credits_charged`: credits used.
+- `status`: `queued`, `running`, `completed`, or `failed`.
+- `result.reaction_distribution`: percentage and count for each reaction type.
+- `result.voice_clusters`: the core output; similar private voices grouped together.
+- `result.agent_voices`: representative individual dossiers and reactions.
+- `id`: saved simulation id.
+- `downloads.markdown`: URL path to export Markdown once completed.
+- `downloads.json`: URL path to export JSON once completed.
+- `credits_charged`: credits used.
 
 ## Download A Saved Result
 

@@ -61,7 +61,7 @@
 
         <section id="api">
           <h2>API</h2>
-          <p>Set your key from the dashboard, then call the simulation endpoint.</p>
+          <p>Set your key from the dashboard, then create a simulation job. The endpoint returns immediately; poll the simulation URL for status and results.</p>
           <pre><code>export AGENT_SIMULATION_API_KEY="sim_..."
 
 curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
@@ -79,9 +79,19 @@ curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
     "simulation": {
       "target_n": 40,
       "max_agent_voices": 8,
-      "max_output_tokens": 16000
+      "max_output_tokens": 30000
     }
   }'</code></pre>
+          <pre><code>{
+  "simulation_id": "SIMULATION_ID",
+  "status": "queued",
+  "polling": {
+    "url": "/api/simulations/SIMULATION_ID",
+    "recommended_interval_ms": 3000
+  }
+}</code></pre>
+          <pre><code>curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
         </section>
 
         <section id="exports">

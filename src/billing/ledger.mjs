@@ -186,6 +186,11 @@ export async function consumeCredits(userId, credits) {
   return addCredits(userId, -credits, "simulation_usage");
 }
 
+export async function refundSimulationCredits(userId, credits, simulationId, reason = "simulation_failed_refund") {
+  if (!credits) return getCredits(userId);
+  return addCredits(userId, credits, reason, { simulation_id: simulationId });
+}
+
 export async function upsertPlan(user, planId) {
   const [updated] = await supabaseRequest(`/profiles?id=eq.${encodeURIComponent(user.id)}`, {
     method: "PATCH",
@@ -215,13 +220,67 @@ export async function storeSimulation({ userId, input, result, creditsCharged = 
   return row;
 }
 
+export async function createSimulationJob({ userId, input, creditsCharged = 0 }) {
+  const [row] = await supabaseRequest("/simulations", {
+    method: "POST",
+    body: JSON.stringify({
+      user_id: userId || null,
+      status: "queued",
+      artifact_type: input?.artifact?.type || null,
+      objective: input?.objective || input?.decision_question || null,
+      requested_n: input?.simulation?.target_n || input?.target_n || null,
+      credits_charged: creditsCharged,
+      request: input || {},
+      result: null,
+      error: null
+    })
+  });
+  return row;
+}
+
+export async function markSimulationRunning(simulationId, userId) {
+  const [row] = await supabaseRequest(`/simulations?id=eq.${encodeURIComponent(simulationId)}&user_id=eq.${encodeURIComponent(userId)}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      status: "running",
+      error: null
+    })
+  });
+  return row;
+}
+
+export async function completeSimulationJob({ simulationId, userId, result }) {
+  const [row] = await supabaseRequest(`/simulations?id=eq.${encodeURIComponent(simulationId)}&user_id=eq.${encodeURIComponent(userId)}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      status: "completed",
+      result,
+      error: null,
+      completed_at: new Date().toISOString()
+    })
+  });
+  return row;
+}
+
+export async function failSimulationJob({ simulationId, userId, error }) {
+  const [row] = await supabaseRequest(`/simulations?id=eq.${encodeURIComponent(simulationId)}&user_id=eq.${encodeURIComponent(userId)}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      status: "failed",
+      error: String(error?.message || error || "Simulation failed."),
+      completed_at: new Date().toISOString()
+    })
+  });
+  return row;
+}
+
 export async function getSimulationForUser(simulationId, userId) {
   const rows = await supabaseRequest(`/simulations?id=eq.${encodeURIComponent(simulationId)}&user_id=eq.${encodeURIComponent(userId)}&limit=1`);
   return rows[0] || null;
 }
 
 export async function listSimulationsForUser(userId, limit = 20) {
-  return supabaseRequest(`/simulations?user_id=eq.${encodeURIComponent(userId)}&select=id,artifact_type,objective,requested_n,credits_charged,created_at,completed_at&order=created_at.desc&limit=${Number(limit) || 20}`);
+  return supabaseRequest(`/simulations?user_id=eq.${encodeURIComponent(userId)}&select=id,status,artifact_type,objective,requested_n,credits_charged,error,created_at,completed_at&order=created_at.desc&limit=${Number(limit) || 20}`);
 }
 
 function normalizeUser(user) {

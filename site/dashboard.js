@@ -82,7 +82,7 @@ async function refreshHistory() {
     el.className = "history-item";
     el.innerHTML = `
       <div><strong>${escapeHtml(item.objective || "Untitled simulation")}</strong></div>
-      <div class="small">${escapeHtml(item.created_at || "")} / ${item.credits_charged} credits</div>
+      <div class="small">${escapeHtml(item.status || "")} / ${escapeHtml(item.created_at || "")} / ${item.credits_charged} credits</div>
       <div class="row">
         <button class="secondary" data-download-json="${item.id}">JSON</button>
         <button class="secondary" data-download-md="${item.id}">Markdown</button>
@@ -118,9 +118,9 @@ async function saveAutoTopup() {
 
 async function runSimulation() {
   $("#run").disabled = true;
-  $("#run-status").textContent = "Simulating private human voices...";
+  $("#run-status").textContent = "Creating simulation job...";
   try {
-    const data = await api("/api/simulate", {
+    const job = await api("/api/simulate", {
       method: "POST",
       headers: { "x-api-key": state.apiKey },
       body: {
@@ -130,20 +130,41 @@ async function runSimulation() {
         simulation: {
           target_n: Number($("#target-n").value),
           max_agent_voices: Number($("#voice-limit").value),
-          max_output_tokens: 16000
+          max_output_tokens: 30000
         }
       }
     });
-    state.latest = data;
-    renderResult(data);
-    $("#run-status").textContent = `Done. Charged ${data.billing?.credits_charged ?? "-"} credits.`;
-    if (data.billing?.credits_remaining !== undefined) $("#balance").textContent = `Credits: ${data.billing.credits_remaining}`;
+    $("#run-status").textContent = `Queued. Simulation id: ${job.simulation_id}. Waiting for results...`;
+    if (job.billing?.credits_remaining !== undefined) $("#balance").textContent = `Credits: ${job.billing.credits_remaining}`;
+    await refreshHistory();
+    const completed = await pollSimulation(job.simulation_id);
+    state.latest = completed.result;
+    renderResult(completed.result);
+    $("#run-status").textContent = `Done. Charged ${completed.credits_charged ?? job.billing?.credits_charged ?? "-"} credits.`;
     await refreshHistory();
   } catch (error) {
     $("#run-status").textContent = error.message;
   } finally {
     $("#run").disabled = false;
   }
+}
+
+async function pollSimulation(id) {
+  const started = Date.now();
+  while (Date.now() - started < 10 * 60 * 1000) {
+    await delay(3000);
+    const data = await api(`/api/simulations/${encodeURIComponent(id)}`, {
+      headers: { "x-api-key": state.apiKey }
+    });
+    if (data.status === "completed" && data.result) return data;
+    if (data.status === "failed") throw new Error(data.error || "Simulation failed.");
+    $("#run-status").textContent = `${data.status || "running"}... ${Math.round((Date.now() - started) / 1000)}s`;
+  }
+  throw new Error("Simulation is still running. Check history again in a moment.");
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function renderResult(data) {

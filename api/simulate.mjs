@@ -1,5 +1,15 @@
+import { waitUntil } from "@vercel/functions";
 import { simulateReaction } from "../src/simulation/engine.mjs";
-import { consumeCredits, getCreditAccount, getUserByApiKey, storeSimulation } from "../src/billing/ledger.mjs";
+import {
+  completeSimulationJob,
+  consumeCredits,
+  createSimulationJob,
+  failSimulationJob,
+  getCreditAccount,
+  getUserByApiKey,
+  markSimulationRunning,
+  refundSimulationCredits
+} from "../src/billing/ledger.mjs";
 import { estimateCredits } from "../src/billing/plans.mjs";
 import { maybeAutoTopup } from "../src/billing/auto-topup.mjs";
 import { handleOptions, setCors } from "../src/http/cors.mjs";
@@ -41,41 +51,74 @@ export default async function handler(request, response) {
       });
       return;
     }
-    const result = await simulateReaction(input);
-    if (usage) {
-      const stored = await storeSimulation({
-        userId: usage.user.id,
-        input,
-        result,
-        creditsCharged: usage.credits
-      });
-      result.simulation_id = stored.id;
-      result.downloads = {
-        json: `/api/simulations/${stored.id}?format=json`,
-        markdown: `/api/simulations/${stored.id}?format=markdown`
-      };
-      result.billing = {
-        credits_charged: usage.credits,
-        credits_remaining: await consumeCredits(usage.user.id, usage.credits),
-        auto_topup: usage.autoTopup
-      };
-      const latestAccount = await getCreditAccount(usage.user.id);
-      if (latestAccount?.balance <= latestAccount?.auto_topup_threshold) {
-        result.billing.auto_topup = await maybeAutoTopup({
-          user: usage.user,
-          creditAccount: latestAccount,
-          reason: "low_balance"
-        });
-        if (result.billing.auto_topup?.charged) {
-          result.billing.credits_remaining = result.billing.auto_topup.balance_after;
-        }
-      }
+    if (!usage) {
+      const result = await simulateReaction(input);
+      response.status(200).json(result);
+      return;
     }
-    response.status(200).json(result);
+
+    const job = await createSimulationJob({
+      userId: usage.user.id,
+      input,
+      creditsCharged: usage.credits
+    });
+    const creditsRemaining = await consumeCredits(usage.user.id, usage.credits);
+    waitUntil(runSimulationJob({ job, user: usage.user, input, credits: usage.credits }));
+
+    response.status(202).json({
+      simulation_id: job.id,
+      status: "queued",
+      object: {
+        type: input?.artifact?.type || "artifact",
+        objective: input?.objective || input?.decision_question || null,
+        audience: typeof input?.audience === "string" ? input.audience : input?.audience?.description || null
+      },
+      polling: {
+        url: `/api/simulations/${job.id}`,
+        recommended_interval_ms: 3000
+      },
+      downloads: {
+        json: `/api/simulations/${job.id}?format=json`,
+        markdown: `/api/simulations/${job.id}?format=markdown`
+      },
+      billing: {
+        credits_charged: usage.credits,
+        credits_remaining: creditsRemaining,
+        auto_topup: usage.autoTopup
+      }
+    });
   } catch (error) {
     response.status(400).json({
       error: error.message
     });
+  }
+}
+
+async function runSimulationJob({ job, user, input, credits }) {
+  try {
+    await markSimulationRunning(job.id, user.id);
+    const result = await simulateReaction(input);
+    result.simulation_id = job.id;
+    result.downloads = {
+      json: `/api/simulations/${job.id}?format=json`,
+      markdown: `/api/simulations/${job.id}?format=markdown`
+    };
+    result.billing = {
+      credits_charged: credits
+    };
+    await completeSimulationJob({ simulationId: job.id, userId: user.id, result });
+
+    const latestAccount = await getCreditAccount(user.id);
+    if (latestAccount?.balance <= latestAccount?.auto_topup_threshold) {
+      await maybeAutoTopup({
+        user,
+        creditAccount: latestAccount,
+        reason: "low_balance"
+      });
+    }
+  } catch (error) {
+    await failSimulationJob({ simulationId: job.id, userId: user.id, error });
+    await refundSimulationCredits(user.id, credits, job.id).catch(() => null);
   }
 }
 
