@@ -20,6 +20,22 @@ Treat the output as a path map:
 5. Keep taste-dependent artifacts as skeletons, ingredients, and decision rules unless the user explicitly asks for final copy.
 6. Prepare the path map so it can later feed human interviews, market tests, or a simulation API.
 
+## Connected Simulation Workflow
+
+Decision Foundation is the first move. Human Reaction Simulation is the second move.
+
+After mapping candidate paths, identify which paths depend on human reaction: selling, publishing, pitching, pricing, messaging, profile positioning, launch strategy, or enterprise communication.
+
+For those paths, prepare a simulation handoff:
+
+- exact artifact or stimulus needed
+- audience to simulate
+- decision the user is trying to make
+- risks or reactions to test
+- variants worth comparing
+
+If the `agent-simulation` skill or Agent Simulation API is available, suggest using it after the path map. Do not simulate vague path labels; convert paths into concrete artifacts first.
+
 ## Non-Negotiable Rule
 
 Do not replace the user's thinking with the agent's taste.

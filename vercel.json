@@ -35,6 +35,10 @@
       "destination": "/site/docs.html"
     },
     {
+      "source": "/docs",
+      "destination": "/site/docs.html"
+    },
+    {
       "source": "/styles.css",
       "destination": "/site/styles.css"
     },
