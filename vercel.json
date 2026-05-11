@@ -39,6 +39,14 @@
       "destination": "/site/docs.html"
     },
     {
+      "source": "/simulation",
+      "destination": "/site/simulation.html"
+    },
+    {
+      "source": "/simulation.html",
+      "destination": "/site/simulation.html"
+    },
+    {
       "source": "/styles.css",
       "destination": "/site/styles.css"
     },

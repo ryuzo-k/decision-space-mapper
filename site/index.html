@@ -6,7 +6,7 @@
     <title>Decision Foundation</title>
     <meta
       name="description"
-      content="Map every viable path, then simulate how people may privately react before you publish, pitch, price, or launch."
+      content="A free agent skill that maps every viable path before you decide."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -17,111 +17,80 @@
         <span>Decision Foundation</span>
       </a>
       <div class="nav-links">
+        <a href="#install">Install</a>
         <a href="#workflow">Workflow</a>
-        <a href="#example">Example</a>
-        <a href="#pricing">Pricing</a>
+        <a href="./simulation.html">Agent Simulation API</a>
         <a href="./docs.html">Docs</a>
-        <a href="./admin.html">Sign in</a>
       </div>
     </nav>
 
     <main>
-      <section class="hero" id="top">
+      <section class="hero hero-single" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">Decision Foundation + Human Reaction Simulation</p>
-          <h1>Decide with fewer blind spots.</h1>
+          <p class="eyebrow">Free agent skill</p>
+          <h1>Map every viable path before you decide.</h1>
           <p class="lede">
-            Map the viable paths in your messy context, then simulate how likely people may privately react before you publish, pitch, price, or launch.
+            Decision Foundation turns messy context into coherent candidate paths, so your AI agent stops giving one narrow answer and starts showing the real decision space.
           </p>
           <div class="hero-actions">
-            <a class="primary-action" href="./admin.html">Create account</a>
+            <a class="primary-action" href="#install">Install the skill</a>
             <a class="ghost-action" href="./docs.html">Read docs</a>
           </div>
-        </div>
-
-        <div class="signal-card">
-          <p class="mini-label">Example output</p>
-          <h2>40 people simulated</h2>
-          <div class="signal-row"><span>Clear and intriguing</span><strong>38%</strong></div>
-          <div class="signal-row"><span>Needs examples</span><strong>25%</strong></div>
-          <div class="signal-row"><span>Skeptical about usefulness</span><strong>18%</strong></div>
-          <blockquote>
-            “I can see how this would save back-and-forth, but where is a real sample output?”
-          </blockquote>
         </div>
       </section>
 
       <section class="workflow-section" id="workflow">
         <div class="section-copy">
-          <p class="eyebrow">Workflow</p>
-          <h2>One system, two moves.</h2>
+          <p class="eyebrow">What it does</p>
+          <h2>A decision map, not another opinion.</h2>
         </div>
         <div class="workflow-grid">
           <article>
             <span>01</span>
-            <h3>Map the decision</h3>
-            <p>Decision Foundation is the free agent skill. It turns messy context into candidate paths instead of one narrow AI answer.</p>
+            <h3>Recover the context</h3>
+            <p>The skill extracts your options, constraints, tensions, assets, hidden audience, and desired outcome from the conversation.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Simulate the reaction</h3>
-            <p>When a path depends on people, test the actual artifact: content, offer, message, landing page, price, profile, or venture idea.</p>
+            <h3>Build candidate paths</h3>
+            <p>Instead of atomic categories, it creates coherent paths: what to foreground, what to hide, who it is for, and what behavior follows.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Export the evidence</h3>
-            <p>Download Markdown or JSON and continue the decision in Claude Code, Codex, Cursor, or with your team.</p>
+            <h3>Prepare the next test</h3>
+            <p>If a path depends on people, it names the artifact and audience you should test next. Simulation is optional and separate.</p>
           </article>
         </div>
       </section>
 
-      <section class="usecase-section">
+      <section class="example-section">
         <div class="section-copy">
-          <p class="eyebrow">Use cases</p>
-          <h2>Built for decisions where human reaction matters.</h2>
-        </div>
-        <div class="usecase-grid">
-          <div>Content and GEO preflight</div>
-          <div>Sales messages and follow-ups</div>
-          <div>Landing pages and offers</div>
-          <div>Pricing and packaging</div>
-          <div>X profiles and launch posts</div>
-          <div>New venture concepts</div>
-        </div>
-      </section>
-
-      <section class="example-section" id="example">
-        <div class="section-copy">
-          <p class="eyebrow">What you get</p>
-          <h2>Not a score. A distribution of private reactions.</h2>
+          <p class="eyebrow">Example</p>
+          <h2>From vague options to real paths.</h2>
         </div>
         <div class="example-layout">
           <div class="distribution-card">
-            <div class="bar-row"><span>Interested but skeptical</span><strong>39%</strong></div>
-            <div class="bar-row"><span>Curious trial users</span><strong>31%</strong></div>
-            <div class="bar-row"><span>Dismissive / prompt-wrapper suspicion</span><strong>17%</strong></div>
-            <div class="bar-row"><span>Pricing anxiety</span><strong>8%</strong></div>
-            <div class="bar-row"><span>High-intent agency/founder buyers</span><strong>5%</strong></div>
+            <h3>Weak output</h3>
+            <p>“You could focus on buyers, personal branding, or AI.”</p>
           </div>
           <div class="voice-card">
-            <p>“Looks like a clever prompt hack dressed up as a product. I’ll poke around, but I won’t pay unless it does something unique.”</p>
-            <p>“If this cuts down user calls and gives solid private voice insights, it could be worth paying for.”</p>
-            <p>“I want to know how many credits a typical artifact costs before I get deep into it.”</p>
+            <h3>Decision Foundation output</h3>
+            <p><strong>Business acquisition profile:</strong> foreground the buyer problem, proof, service outcome, and contact path. De-emphasize age, side projects, and abstract philosophy.</p>
+            <p><strong>Full self / artist-founder profile:</strong> foreground the human mind work, taste, essays, prototypes, and unusual point of view. Accept that buyer clarity will be weaker.</p>
           </div>
         </div>
       </section>
 
-      <section class="install-section">
+      <section class="install-section" id="install">
         <div class="section-copy">
-          <p class="eyebrow">Free skill</p>
-          <h2>Install Decision Foundation into your agent.</h2>
-          <p>Use the free skill to map the options first. Then use the paid simulation API when you need to understand likely human reactions.</p>
+          <p class="eyebrow">Install</p>
+          <h2>Paste this into Claude Code, Codex, Cursor, or another agent.</h2>
         </div>
-        <div class="install-card" id="install">
+        <div class="install-card">
           <div class="install-card-top">
             <div>
               <p class="mini-label">Auto install</p>
-              <h2>Paste this into Claude Code, Codex, Cursor, or another agent.</h2>
+              <h2>Agent-native setup</h2>
             </div>
             <button id="copy-install-prompt" type="button">Copy</button>
           </div>
@@ -130,18 +99,13 @@
         </div>
       </section>
 
-      <section class="pricing-section" id="pricing">
+      <section class="usecase-section">
         <div class="section-copy">
-          <p class="eyebrow">Pricing</p>
-          <h2>Self-serve credits. Enterprise data is custom.</h2>
+          <p class="eyebrow">Separate paid product</p>
+          <h2>Need to test how people react?</h2>
+          <p>Decision Foundation is the free path-mapping skill. Agent Simulation API is a separate paid product for reaction testing.</p>
         </div>
-        <div class="pricing-grid">
-          <article><h3>$20</h3><p>100 credits for quick checks and early experiments.</p></article>
-          <article><h3>$99</h3><p>700 credits for regular content, offer, and message checks.</p></article>
-          <article><h3>$299</h3><p>2,500 credits for teams, agencies, and larger comparison runs.</p></article>
-          <article><h3>Enterprise</h3><p>External data, private context packs, no-retention workflows, and grounded simulations.</p></article>
-        </div>
-        <a class="primary-action" href="./admin.html">Create account</a>
+        <a class="primary-action" href="./simulation.html">Open Agent Simulation API</a>
       </section>
     </main>
 

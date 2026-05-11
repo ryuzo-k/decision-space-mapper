@@ -76,6 +76,11 @@ code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospac
   padding: 70px clamp(18px, 5vw, 64px) 56px;
 }
 
+.hero-single {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: calc(82vh - 68px);
+}
+
 .eyebrow, .mini-label {
   margin: 0 0 12px;
   color: var(--accent);
