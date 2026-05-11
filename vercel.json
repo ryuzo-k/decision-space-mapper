@@ -1,0 +1,62 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "fluid": true,
+  "functions": {
+    "api/simulate.mjs": {
+      "maxDuration": 300
+    },
+    "api/billing/*.mjs": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/site/index.html"
+    },
+    {
+      "source": "/admin.html",
+      "destination": "/site/admin.html"
+    },
+    {
+      "source": "/admin.js",
+      "destination": "/site/admin.js"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/site/styles.css"
+    },
+    {
+      "source": "/main.js",
+      "destination": "/site/main.js"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health.mjs"
+    },
+    {
+      "source": "/api/simulate",
+      "destination": "/api/simulate.mjs"
+    },
+    {
+      "source": "/api/billing/checkout",
+      "destination": "/api/billing/checkout.mjs"
+    },
+    {
+      "source": "/api/billing/claim",
+      "destination": "/api/billing/claim.mjs"
+    },
+    {
+      "source": "/api/billing/me",
+      "destination": "/api/billing/me.mjs"
+    },
+    {
+      "source": "/api/billing/auto-topup",
+      "destination": "/api/billing/auto-topup.mjs"
+    },
+    {
+      "source": "/api/billing/webhook",
+      "destination": "/api/billing/webhook.mjs"
+    }
+  ]
+}

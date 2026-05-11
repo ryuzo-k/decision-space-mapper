@@ -115,9 +115,34 @@ The skill should produce source-grounded candidate paths, not loose categories o
 This repository intentionally separates:
 
 - **Core protocol:** `skills/decision-space-mapper/SKILL.md`
+- **Reaction simulation API prototype:** `src/simulation/`
 - **Cursor adapter:** `adapters/cursor/decision-space-mapper.mdc`
 - **Generic prompt:** `prompts/ai-install.md`
 - **Website:** `site/`
 - **Optional CLI:** `bin/decision-space-mapper.mjs`
 
 The skill is the free distribution layer for the path-mapping product and a preparation layer for future simulation workflows.
+
+## Product 2 Prototype: Reaction Simulation API
+
+The first local API prototype is included so we can test the output shape before building the full backend.
+
+```bash
+npm run serve:api
+```
+
+Then call:
+
+```bash
+curl -X POST http://127.0.0.1:8787/simulate \
+  -H 'content-type: application/json' \
+  -d @request.json
+```
+
+Or print a sample request:
+
+```bash
+npm run sim:sample
+```
+
+See `docs/product-2-api.md` for the current contract.

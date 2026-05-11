@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Simulation API Admin</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body { min-height: 100vh; }
+      .admin-shell { max-width: 920px; margin: 0 auto; padding: 48px 20px; }
+      .admin-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 28px 0; }
+      .plan-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px; background: white; }
+      .plan-card h2 { font-size: 18px; margin: 0 0 8px; }
+      .plan-card p { color: var(--muted); min-height: 48px; }
+      .admin-box { border: 1px solid var(--line); border-radius: 8px; padding: 18px; background: white; margin-top: 16px; }
+      input { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 8px; padding: 12px; font: inherit; }
+      button { cursor: pointer; }
+      code { word-break: break-all; }
+    </style>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <a href="./index.html">Decision Foundation</a>
+      <h1>Agent Simulation API</h1>
+      <p>Buy credits, claim your API key, and check your remaining balance.</p>
+
+      <div class="admin-box">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+
+      <section class="admin-grid">
+        <article class="plan-card">
+          <h2>$20 Starter</h2>
+          <p>200 credits for testing real artifacts.</p>
+          <button data-plan="starter">Buy credits</button>
+        </article>
+        <article class="plan-card">
+          <h2>$99 Pro</h2>
+          <p>1,500 monthly credits for regular decisions.</p>
+          <button data-plan="pro">Start Pro</button>
+        </article>
+        <article class="plan-card">
+          <h2>$299 Pro Max</h2>
+          <p>6,000 monthly credits for heavy or agency use.</p>
+          <button data-plan="pro_max">Start Pro Max</button>
+        </article>
+      </section>
+
+      <section class="admin-box">
+        <h2>Claim API key</h2>
+        <p>After checkout, this page will claim the key once. Store it locally.</p>
+        <button id="claim">Claim from checkout</button>
+        <pre id="claim-output"></pre>
+      </section>
+
+      <section class="admin-box">
+        <h2>Check balance</h2>
+        <input id="api-key" placeholder="sim_..." />
+        <button id="check">Check credits</button>
+        <pre id="balance-output"></pre>
+      </section>
+
+      <section class="admin-box">
+        <h2>Auto top-up</h2>
+        <p>When credits run low, charge the saved Stripe card and add credits automatically.</p>
+        <label>
+          <input id="auto-enabled" type="checkbox" />
+          Enable auto top-up
+        </label>
+        <label for="auto-threshold">Threshold</label>
+        <input id="auto-threshold" type="number" min="0" step="1" value="50" />
+        <label for="auto-credits">Credits per top-up</label>
+        <input id="auto-credits" type="number" min="1" step="1" value="200" />
+        <button id="save-auto">Save auto top-up</button>
+        <pre id="auto-output"></pre>
+      </section>
+    </main>
+    <script src="./admin.js"></script>
+  </body>
+</html>
