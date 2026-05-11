@@ -32,7 +32,7 @@ export default async function handler(request, response) {
       return;
     }
 
-    const credits = plan.credits || plan.monthlyCredits || CREDIT_PLANS.starter.credits;
+    const credits = plan.credits || plan.monthlyCredits || CREDIT_PLANS.pack_100.credits;
     const { user, apiKey } = await createCustomerAccess({
       email: session.customer_details?.email || session.customer_email,
       stripeCustomerId: session.customer,

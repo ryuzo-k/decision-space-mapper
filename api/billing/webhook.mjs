@@ -31,7 +31,7 @@ export default async function handler(request, response) {
 
 async function handleCheckoutCompleted(session) {
   const plan = getPlan(session.metadata?.plan_id || "starter");
-  const credits = plan.credits || plan.monthlyCredits || CREDIT_PLANS.starter.credits;
+  const credits = plan.credits || plan.monthlyCredits || CREDIT_PLANS.pack_100.credits;
   let user = await getUserByStripeCustomer(session.customer);
 
   if (!user) {

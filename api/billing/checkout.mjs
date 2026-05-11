@@ -38,8 +38,13 @@ export default async function handler(request, response) {
 }
 
 function getPriceId(planId) {
+  const legacy = {
+    pack_100: "STRIPE_PRICE_STARTER",
+    pack_700: "STRIPE_PRICE_PRO",
+    pack_2500: "STRIPE_PRICE_PRO_MAX"
+  };
   const envKey = `STRIPE_PRICE_${planId.toUpperCase()}`;
-  const priceId = process.env[envKey];
+  const priceId = process.env[envKey] || process.env[legacy[planId]];
   if (!priceId) {
     throw new Error(`${envKey} is required.`);
   }

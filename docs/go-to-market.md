@@ -112,14 +112,23 @@ Good later as API customers.
 
 Goal: high margin, fast cash, low support.
 
-### MVP Pricing
+### Credit Pricing
 
 - Free trial: 20 credits
-- Starter: $20 for 200 credits
-- Pro: $99/mo for 1,500 credits
-- Pro Max: $299/mo for 6,000 credits
+- $20 for 100 credits
+- $99 for 700 credits
+- $299 for 2,500 credits
+- Enterprise / external data: custom contract
 
-Keep this for self-serve.
+Keep self-serve as credit packs. Do not force weird SaaS plans before usage patterns are clear.
+
+### Credit Use
+
+- Quick: 40 people = 5 credits
+- Standard: 120 people = 20 credits
+- Deep: 300 people = 60 credits
+- Report: 1,000 people = 250 credits
+- Grounded / external data = custom contract
 
 ### Cash-Now Offers
 

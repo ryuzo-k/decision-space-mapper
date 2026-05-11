@@ -91,7 +91,16 @@ Use:
 
 - `target_n: 40` for fast first-pass checks.
 - `target_n: 120` for serious launch/content decisions.
-- `target_n: 180+` for paid reports or high-stakes decisions.
+- `target_n: 300` for deeper comparison.
+- `target_n: 1000` for report-grade synthetic coverage.
+
+Credit use:
+
+- 40 people = 5 credits
+- 120 people = 20 credits
+- 300 people = 60 credits
+- 1000 people = 250 credits
+- external data / grounded simulations = enterprise contract
 
 Large simulations can take longer. Run a small pass first to make sure the artifact and audience are framed correctly.
 
