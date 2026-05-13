@@ -14,7 +14,8 @@ $("#logout").addEventListener("click", () => {
   localStorage.removeItem("agent_sim_user");
   location.href = "./admin.html";
 });
-$("#copy-key").addEventListener("click", () => navigator.clipboard.writeText(state.apiKey));
+$("#copy-key").addEventListener("click", () => copyText(state.apiKey, $("#copy-key"), "Copy API key"));
+$("#copy-agent-prompt").addEventListener("click", () => copyText(agentSetupPrompt(), $("#copy-agent-prompt"), "Copy agent setup prompt"));
 $("#save-auto").addEventListener("click", saveAutoTopup);
 $("#run").addEventListener("click", runSimulation);
 $("#sample").addEventListener("click", loadSample);
@@ -226,6 +227,48 @@ function loadSample() {
   $("#target-n").value = 40;
   $("#voice-limit").value = 8;
   $("#mode").value = "fast";
+}
+
+function agentSetupPrompt() {
+  return `You can use Agent Simulation API for reaction simulation.
+
+API base URL:
+https://agent-simulation-api.vercel.app
+
+API key:
+${state.apiKey}
+
+When I ask you to simulate reactions, do this:
+
+1. Identify the exact artifact people will see. If the artifact is missing, ask me for it.
+2. Build a context packet from the current conversation: objective, audience, channel, sender/company context, desired action, known concerns, and alternatives.
+3. Call POST /api/simulate with:
+   - objective
+   - artifact.type
+   - artifact.content
+   - audience.description
+   - simulation.mode: "fast" for first pass, "standard" for serious decisions
+   - simulation.target_n: 40 for first pass, 120 for serious decisions
+4. Poll GET /api/simulations/{simulation_id} until completed.
+5. Show me:
+   - simulation_id
+   - reaction distribution
+   - representative raw voices
+   - the concrete decision implications
+   - what should be tested or changed next
+6. If there are multiple candidate options, simulate each option instead of guessing.
+7. Never replace the API with your own casual reaction prediction unless I explicitly ask you not to use the API.`;
+}
+
+function copyText(text, button, fallbackLabel) {
+  navigator.clipboard.writeText(text).then(() => {
+    button.textContent = "Copied";
+    window.setTimeout(() => {
+      button.textContent = fallbackLabel;
+    }, 1200);
+  }).catch(() => {
+    button.textContent = "Copy failed";
+  });
 }
 
 async function api(path, options = {}) {

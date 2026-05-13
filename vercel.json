@@ -43,6 +43,10 @@
       "destination": "/site/docs.html"
     },
     {
+      "source": "/docs.js",
+      "destination": "/site/docs.js"
+    },
+    {
       "source": "/docs",
       "destination": "/site/docs.html"
     },

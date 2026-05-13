@@ -3,66 +3,126 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Simulation API and Decision Foundation Docs</title>
-    <style>
-      :root { --bg:#f7f7f2; --panel:#fff; --ink:#101214; --muted:#626a70; --line:#d9ddd5; --accent:#176f63; --soft:#eef1ea; }
-      * { box-sizing: border-box; }
-      body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      .layout { display:grid; grid-template-columns: 260px minmax(0, 920px); gap: 40px; max-width: 1240px; margin: 0 auto; padding: 34px 20px 80px; }
-      aside { position: sticky; top: 24px; align-self:start; border:1px solid var(--line); background:var(--panel); padding:18px; }
-      nav a { display:block; padding:8px 0; color:var(--muted); text-decoration:none; font-size:14px; }
-      main { min-width:0; }
-      a { color: inherit; }
-      h1 { font-size: clamp(44px, 7vw, 82px); line-height: .96; letter-spacing: 0; margin: 0 0 18px; }
-      h2 { margin-top: 52px; padding-top: 20px; border-top:1px solid var(--line); font-size: 30px; }
-      h3 { margin-top: 28px; font-size: 20px; }
-      p, li { color: var(--muted); line-height: 1.68; }
-      pre { overflow:auto; border:1px solid var(--line); background:#101214; color:#eef1ea; padding:18px; line-height:1.55; }
-      code { font-family: "SFMono-Regular", Consolas, monospace; }
-      .panel { border:1px solid var(--line); background:var(--panel); padding:22px; margin-top:18px; }
-      .cta { display:inline-flex; min-height:44px; align-items:center; justify-content:center; padding:0 14px; background:var(--ink); color:white; text-decoration:none; font-weight:800; }
-      .muted { color: var(--muted); }
-      @media (max-width: 860px) { .layout { grid-template-columns:1fr; } aside { position:static; } }
-    </style>
+    <title>Agent Simulation API Docs</title>
+    <meta
+      name="description"
+      content="Quickstart, agent setup prompt, API reference, exports, and credit notes for Agent Simulation API."
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <div class="layout">
-      <aside>
-        <strong>Docs</strong>
-        <nav>
-          <a href="#overview">Overview</a>
-          <a href="#skills">Agent skills</a>
-          <a href="#api">API</a>
-          <a href="#exports">Exports</a>
-          <a href="#pricing">Credits</a>
-          <a href="#enterprise">Enterprise</a>
-        </nav>
-      </aside>
+  <body class="essay-page">
+    <div class="essay-shell docs-shell">
+      <nav class="essay-nav" aria-label="Primary navigation">
+        <a class="essay-brand" href="./">Agent Simulation API</a>
+        <div class="essay-nav-links">
+          <a href="./">Home</a>
+          <a href="./decision-foundation">Decision Foundation</a>
+          <a href="./admin.html">Sign in</a>
+          <a class="essay-button essay-button-small" href="./admin.html">Get API key &rarr;</a>
+        </div>
+      </nav>
+
       <main>
-        <section id="overview">
-          <h1>Product Docs</h1>
-          <p>There are two separate products here. Agent Simulation API is the paid product for testing likely private human reactions to an artifact. Decision Foundation is a free skill for mapping possible paths before you decide what to test.</p>
-          <a class="cta" href="./admin.html">Create account</a>
+        <header class="essay-hero docs-hero">
+          <h1>
+            Give your agent an API key,
+            <br />
+            then ask it to simulate reactions.
+          </h1>
+          <p class="essay-lede">
+            This page is for users who want to use Agent Simulation API from Claude Code, Codex, Cursor, Hermes Agent, OpenClaw, a script, or their own product.
+          </p>
+          <div class="essay-actions">
+            <a class="essay-button" href="./admin.html">Create account &rarr;</a>
+            <a class="essay-link" href="#agent-prompt">Copy agent setup prompt</a>
+          </div>
+        </header>
+
+        <section class="essay-section docs-card-section" id="fastest-path">
+          <h2>Fastest path</h2>
+          <ol class="essay-steps">
+            <li>
+              <div>1. Create an account</div>
+              <p>Open the dashboard, create an account, and copy your API key.</p>
+            </li>
+            <li>
+              <div>2. Paste the agent setup prompt</div>
+              <p>Give Claude Code, Codex, Cursor, Hermes Agent, or another AI agent the prompt below.</p>
+            </li>
+            <li>
+              <div>3. Ask for a simulation</div>
+              <p>Paste the artifact people will see, describe the audience, and ask the agent to call the API.</p>
+            </li>
+            <li>
+              <div>4. Continue from the export</div>
+              <p>Use the Markdown or JSON result as context for the next decision.</p>
+            </li>
+          </ol>
         </section>
 
-        <section id="skills">
-          <h2>Agent skills</h2>
-          <div class="panel">
-            <h3>Decision Foundation</h3>
-            <p>Free skill. Use it first when the decision is messy and you need a map of candidate paths.</p>
-            <pre><code>npx skills add ryuzo-k/decision-space-mapper</code></pre>
-          </div>
-          <div class="panel">
-            <h3>Agent Simulation API</h3>
-            <p>Paid API workflow. Use it after you have an artifact, option, message, post, landing page, or venture concept to test.</p>
-            <p>Decision Foundation can prepare the options, but simulation is a separate product with separate billing.</p>
+        <section class="essay-section" id="agent-prompt">
+          <h2>Agent setup prompt</h2>
+          <p>
+            Copy this into your AI agent after replacing <code>sim_YOUR_KEY</code> with your dashboard API key. This is the easiest way to make the API usable without writing code yourself.
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Universal prompt for Claude Code, Codex, Cursor, Hermes Agent, and OpenClaw</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="agent-setup-prompt">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="agent-setup-prompt">You can use Agent Simulation API for reaction simulation.
+
+API base URL:
+https://agent-simulation-api.vercel.app
+
+API key:
+sim_YOUR_KEY
+
+When I ask you to simulate reactions, do this:
+
+1. Identify the exact artifact people will see. If the artifact is missing, ask me for it.
+2. Build a context packet from the current conversation: objective, audience, channel, sender/company context, desired action, known concerns, and alternatives.
+3. Call POST /api/simulate with:
+   - objective
+   - artifact.type
+   - artifact.content
+   - audience.description
+   - simulation.mode: "fast" for first pass, "standard" for serious decisions
+   - simulation.target_n: 40 for first pass, 120 for serious decisions
+4. Poll GET /api/simulations/{simulation_id} until completed.
+5. Show me:
+   - simulation_id
+   - reaction distribution
+   - representative raw voices
+   - the concrete decision implications
+   - what should be tested or changed next
+6. If there are multiple candidate options, simulate each option instead of guessing.
+7. Never replace the API with your own casual reaction prediction unless I explicitly ask you not to use the API.</code></pre>
           </div>
         </section>
 
-        <section id="api">
-          <h2>API</h2>
-          <p>Set your key from the dashboard, then create a simulation job. The endpoint returns immediately; poll the simulation URL for status and results.</p>
-          <pre><code>export AGENT_SIMULATION_API_KEY="sim_..."
+        <section class="essay-section" id="example-ask">
+          <h2>Example asks</h2>
+          <ul class="essay-feature-list">
+            <li><span>Message decision</span> &mdash; "Use Agent Simulation API to compare these three DMs and tell me which one I should send."</li>
+            <li><span>Content preflight</span> &mdash; "Simulate how AI founders and agency owners will react before I publish this post."</li>
+            <li><span>Landing page</span> &mdash; "Run a standard simulation on this LP and show what makes people trust or distrust it."</li>
+            <li><span>New business idea</span> &mdash; "Simulate the buyer reaction to this product concept and separate curiosity from willingness to pay."</li>
+            <li><span>Decision Foundation flow</span> &mdash; "Use Decision Foundation to map the options, then simulate every concrete option with Agent Simulation API."</li>
+          </ul>
+        </section>
+
+        <section class="essay-section" id="api">
+          <h2>API quickstart</h2>
+          <p>
+            The API is asynchronous. Create a job, poll until it completes, then download JSON or Markdown.
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Create a simulation</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-create">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-create">export AGENT_SIMULATION_API_KEY="sim_..."
 
 curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
   -H "content-type: application/json" \
@@ -74,7 +134,7 @@ curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
       "content": "Paste the actual text people will see."
     },
     "audience": {
-      "description": "Describe who will see this."
+      "description": "Describe who will see this, where they see it, and what they already believe."
     },
     "simulation": {
       "mode": "fast",
@@ -83,47 +143,75 @@ curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
       "max_output_tokens": 30000
     }
   }'</code></pre>
-          <pre><code>{
-  "simulation_id": "SIMULATION_ID",
-  "status": "queued",
-  "polling": {
-    "url": "/api/simulations/SIMULATION_ID",
-    "recommended_interval_ms": 3000
-  }
-}</code></pre>
-          <pre><code>curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID" \
-  -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
-        </section>
+          </div>
 
-        <section id="exports">
-          <h2>Exports</h2>
-          <p>Every saved simulation can be exported as Markdown or JSON. Use the export as context in Claude Code, Codex, Cursor, or a team discussion.</p>
-          <pre><code>curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID?format=markdown" \
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Poll the result</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-poll">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-poll">curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID" \
   -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
-        </section>
-
-        <section id="pricing">
-          <h2>Credits</h2>
-          <ul>
-            <li>Free trial: 20 credits</li>
-            <li>$20: 100 credits</li>
-            <li>$99: 700 credits</li>
-            <li>$299: 2,500 credits</li>
-          </ul>
-          <div class="panel">
-            <p><strong>Quick:</strong> 40 people = 5 credits</p>
-            <p><strong>Standard:</strong> 120 people = 20 credits</p>
-            <p><strong>Deep:</strong> 300 people = 60 credits</p>
-            <p><strong>Report:</strong> 1,000 people = 250 credits</p>
           </div>
         </section>
 
-        <section id="enterprise">
-          <h2>Enterprise / grounded simulations</h2>
-          <p>External-data simulations are custom. Use this for CRM, X/social data, customer lists, reviews, private context packs, no-retention workflows, and high-stakes reports.</p>
-          <p>Self-serve credits are for fast synthetic preflight checks. Enterprise work is for grounded audience modeling.</p>
+        <section class="essay-section" id="response">
+          <h2>Response shape</h2>
+          <ul class="essay-feature-list">
+            <li><span>status</span> &mdash; queued, running, completed, or failed.</li>
+            <li><span>result.reaction_distribution</span> &mdash; percentages and counts by reaction type.</li>
+            <li><span>result.voice_clusters</span> &mdash; grouped private voices and deeper patterns.</li>
+            <li><span>result.agent_voices</span> &mdash; representative individual simulated voices.</li>
+            <li><span>downloads</span> &mdash; Markdown and JSON export URLs after completion.</li>
+            <li><span>credits_charged</span> &mdash; credits used by the simulation.</li>
+          </ul>
+        </section>
+
+        <section class="essay-section" id="exports">
+          <h2>Exports</h2>
+          <p>
+            Use exports as durable context. Paste them back into Claude Code, Codex, Cursor, your team chat, or your own internal decision docs.
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Download Markdown</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-export">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-export">curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID?format=markdown" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
+          </div>
+        </section>
+
+        <section class="essay-section" id="modes">
+          <h2>Modes and credits</h2>
+          <div class="essay-pricing docs-pricing">
+            <div><strong>Fast</strong><span>40 people. 5 credits. First-pass checks.</span></div>
+            <div><strong>Standard</strong><span>120 people. 20 credits. Serious publish/send decisions.</span></div>
+            <div><strong>Deep</strong><span>300 people. 60 credits. Larger comparison runs.</span></div>
+            <div><strong>Report</strong><span>1,000 people. 250 credits. Report-grade synthetic coverage.</span></div>
+          </div>
+        </section>
+
+        <section class="essay-section" id="context">
+          <h2>Context quality</h2>
+          <p>
+            The API gets better when the agent sends the exact artifact, the audience, the channel, the sender/company context, the desired action, and known worries. Thin context produces generic voices. Good agent usage should build a context packet before calling the API.
+          </p>
+        </section>
+
+        <section class="essay-section" id="enterprise">
+          <h2>Enterprise</h2>
+          <p>
+            Self-serve credits are for fast synthetic preflight checks. Grounded simulations with CRM data, X/social data, customer lists, reviews, private context packs, no-retention workflows, or high-stakes research are custom.
+          </p>
         </section>
       </main>
+
+      <footer class="essay-footer">
+        <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Agent Simulation API Docs</div>
+      </footer>
     </div>
+    <script src="./docs.js"></script>
   </body>
 </html>

@@ -89,6 +89,7 @@
       .share { color: var(--accent-2); font-weight: 850; white-space: nowrap; }
       .voice { border-left: 3px solid var(--ink); padding: 8px 0 8px 12px; margin: 8px 0; line-height: 1.55; }
       .history-item { border-top: 1px solid var(--line); padding: 12px 0; }
+      .text-link { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
       .hidden { display: none !important; }
       @media (max-width: 980px) {
         .layout, .result-layout, .grid-2, .plans { grid-template-columns: 1fr; }
@@ -111,6 +112,15 @@
             <div id="balance" class="status">Credits: -</div>
             <div class="key-box" id="api-key"></div>
             <button id="copy-key" class="secondary">Copy API key</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><div><h2>Agent setup</h2><p class="small">Paste this into Claude Code, Codex, Cursor, Hermes Agent, OpenClaw, or another AI agent.</p></div></div>
+          <div class="panel-body stack">
+            <button id="copy-agent-prompt">Copy agent setup prompt</button>
+            <div class="small">This includes your API key and tells the agent to call the API instead of guessing reactions.</div>
+            <a class="small text-link" href="./docs" target="_blank" rel="noopener">Open docs</a>
           </div>
         </section>
 
