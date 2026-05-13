@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Simulation API Docs</title>
+    <meta
+      name="description"
+      content="Agent Simulation API の日本語クイックスタート、AIエージェント導入プロンプト、API仕様、エクスポート、クレジット説明。"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="essay-page">
+    <div class="essay-shell docs-shell">
+      <nav class="essay-nav" aria-label="Primary navigation">
+        <a class="essay-brand" href="/ja">Agent Simulation API</a>
+        <div class="essay-nav-links">
+          <a href="/ja">Home</a>
+          <a href="/decision-foundation">Decision Foundation</a>
+          <a href="/docs">English</a>
+          <a href="/admin.html">Sign in</a>
+          <a class="essay-button essay-button-small" href="/admin.html">Get API key &rarr;</a>
+        </div>
+      </nav>
+
+      <main>
+        <header class="essay-hero docs-hero">
+          <h1>
+            APIキーをAIに渡して、
+            <br />
+            反応をシミュレーションする。
+          </h1>
+          <p class="essay-lede">
+            このページは、Claude Code、Codex、Cursor、Hermes Agent、OpenClaw、スクリプト、自社プロダクトから Agent Simulation API を使うための日本語Docsです。
+          </p>
+          <div class="essay-actions">
+            <a class="essay-button" href="/admin.html">アカウントを作成する &rarr;</a>
+            <a class="essay-link" href="#agent-prompt">導入プロンプトをコピーする</a>
+          </div>
+        </header>
+
+        <section class="essay-section docs-card-section" id="fastest-path">
+          <h2>最短の使い方</h2>
+          <ol class="essay-steps">
+            <li>
+              <div>1. アカウントを作る</div>
+              <p>Dashboardを開き、アカウントを作成してAPIキーをコピーします。</p>
+            </li>
+            <li>
+              <div>2. AIに導入プロンプトを貼る</div>
+              <p>下のプロンプトを Claude Code、Codex、Cursor、Hermes Agent などに貼ります。</p>
+            </li>
+            <li>
+              <div>3. シミュレーションを頼む</div>
+              <p>人に見せる成果物、対象者、意思決定したい内容を渡し、APIを呼ぶように頼みます。</p>
+            </li>
+            <li>
+              <div>4. 結果を会話に戻す</div>
+              <p>MarkdownまたはJSONの結果を、次の意思決定のコンテキストとして使います。</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="essay-section" id="agent-prompt">
+          <h2>AIエージェント導入プロンプト</h2>
+          <p>
+            <code>sim_YOUR_KEY</code> をDashboardのAPIキーに置き換えて、AIエージェントに貼ってください。これで、ユーザーが自分でAPIを叩かなくても使える状態になります。
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Claude Code / Codex / Cursor / Hermes Agent / OpenClaw 向け共通プロンプト</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="agent-setup-prompt-ja">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="agent-setup-prompt-ja">あなたは Agent Simulation API を使って、人間の反応シミュレーションを実行できます。
+
+API base URL:
+https://agent-simulation-api.vercel.app
+
+API key:
+sim_YOUR_KEY
+
+私が「反応をシミュレーションして」「どちらを送るべきか見て」「公開前チェックして」などと言ったら、次の手順で進めてください。
+
+1. 人に見せる成果物を特定してください。成果物が不足している場合は、先に私に聞いてください。
+2. 現在の会話から、目的、対象者、表示される場所、送信者/会社の文脈、望む行動、既知の懸念、比較候補をまとめたコンテキストパケットを作ってください。
+3. POST /api/simulate を呼んでください。bodyには以下を入れてください。
+   - objective
+   - artifact.type
+   - artifact.content
+   - audience.description
+   - simulation.mode: 最初は "fast"、重要な意思決定では "standard"
+   - simulation.target_n: 最初は40、重要な意思決定では120
+4. GET /api/simulations/{simulation_id} を completed になるまでpollしてください。
+5. 結果として、必ず以下を見せてください。
+   - simulation_id
+   - 反応分布
+   - 代表的な生の声
+   - 具体的な意思決定上の示唆
+   - 次に何を変える/試すべきか
+6. 複数の候補がある場合は、推測で選ばず、それぞれをシミュレーションしてください。
+7. 私が明示的に「APIを使わないで」と言わない限り、あなた自身の雑な反応予測で代替しないでください。</code></pre>
+          </div>
+        </section>
+
+        <section class="essay-section" id="example-ask">
+          <h2>頼み方の例</h2>
+          <ul class="essay-feature-list">
+            <li><span>DM比較</span> &mdash; 「この3つのDMをAgent Simulation APIで比較して、どれを送るべきか判断して。」</li>
+            <li><span>コンテンツ公開前チェック</span> &mdash; 「この投稿を出す前に、AI創業者や代理店経営者がどう反応するかシミュレーションして。」</li>
+            <li><span>LP検証</span> &mdash; 「このLPをstandardでシミュレーションして、信頼される点と疑われる点を出して。」</li>
+            <li><span>新規事業案</span> &mdash; 「この事業案に対する買い手の反応を見て、興味と支払意欲を分けて。」</li>
+            <li><span>Decision Foundation連携</span> &mdash; 「Decision Foundationで選択肢を整理してから、具体的な候補を全部Agent Simulation APIでシミュレーションして。」</li>
+          </ul>
+        </section>
+
+        <section class="essay-section" id="api">
+          <h2>API quickstart</h2>
+          <p>
+            APIは非同期です。ジョブを作成し、完了までpollし、JSONまたはMarkdownでダウンロードします。
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>シミュレーションを作成する</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-create-ja">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-create-ja">export AGENT_SIMULATION_API_KEY="sim_..."
+
+curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
+  -H "content-type: application/json" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY" \
+  -d '{
+    "objective": "Decide whether to publish this content.",
+    "artifact": {
+      "type": "content_draft",
+      "content": "Paste the actual text people will see."
+    },
+    "audience": {
+      "description": "Describe who will see this, where they see it, and what they already believe."
+    },
+    "simulation": {
+      "mode": "fast",
+      "target_n": 40,
+      "max_agent_voices": 8,
+      "max_output_tokens": 30000
+    }
+  }'</code></pre>
+          </div>
+
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>結果をpollする</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-poll-ja">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-poll-ja">curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
+          </div>
+        </section>
+
+        <section class="essay-section" id="response">
+          <h2>レスポンス</h2>
+          <ul class="essay-feature-list">
+            <li><span>status</span> &mdash; queued、running、completed、failed。</li>
+            <li><span>result.reaction_distribution</span> &mdash; 反応タイプごとの割合と人数。</li>
+            <li><span>result.voice_clusters</span> &mdash; 似た本音の声と、その背後にある傾向。</li>
+            <li><span>result.agent_voices</span> &mdash; 代表的な個別エージェントの声。</li>
+            <li><span>downloads</span> &mdash; 完了後に使えるMarkdown / JSONの出力URL。</li>
+            <li><span>credits_charged</span> &mdash; 使用されたクレジット数。</li>
+          </ul>
+        </section>
+
+        <section class="essay-section" id="exports">
+          <h2>エクスポート</h2>
+          <p>
+            エクスポートは、次の会話に持ち込むための証拠です。Claude Code、Codex、Cursor、チームチャット、社内資料に貼って使えます。
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Markdownをダウンロード</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-export-ja">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="curl-export-ja">curl -s "https://agent-simulation-api.vercel.app/api/simulations/SIMULATION_ID?format=markdown" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY"</code></pre>
+          </div>
+        </section>
+
+        <section class="essay-section" id="modes">
+          <h2>モードとクレジット</h2>
+          <div class="essay-pricing docs-pricing">
+            <div><strong>Fast</strong><span>40人。5 credits。最初の確認用。</span></div>
+            <div><strong>Standard</strong><span>120人。20 credits。重要な公開・送信判断向け。</span></div>
+            <div><strong>Deep</strong><span>300人。60 credits。より大きな比較向け。</span></div>
+            <div><strong>Report</strong><span>1,000人。250 credits。レポート用途の合成カバレッジ。</span></div>
+          </div>
+        </section>
+
+        <section class="essay-section" id="context">
+          <h2>コンテキスト品質</h2>
+          <p>
+            APIは、成果物そのもの、対象者、チャネル、送信者/会社の文脈、望む行動、既知の不安が入っているほど良くなります。情報が薄いと、声も薄くなります。AIエージェントから使う場合は、APIを呼ぶ前にコンテキストパケットを作らせてください。
+          </p>
+        </section>
+
+        <section class="essay-section" id="enterprise">
+          <h2>エンタープライズ</h2>
+          <p>
+            セルフサーブのクレジットは、高速な合成シミュレーション向けです。CRM、X/social data、顧客リスト、レビュー、社内データ、no-retention、厳密な調査用途はカスタム対応になります。
+          </p>
+        </section>
+      </main>
+
+      <footer class="essay-footer">
+        <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Agent Simulation API Docs</div>
+      </footer>
+    </div>
+    <script src="/docs.js"></script>
+  </body>
+</html>

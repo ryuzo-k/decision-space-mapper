@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Simulation API</title>
+    <meta
+      name="description"
+      content="メッセージ、コンテンツ、LP、オファー、事業案を世の中に出す前に、人間の反応をシミュレーションするAPI。"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="essay-page">
+    <div class="essay-shell">
+      <nav class="essay-nav" aria-label="Primary navigation">
+        <a class="essay-brand" href="/ja">Agent Simulation API</a>
+        <div class="essay-nav-links">
+          <a href="/ja/docs">Docs</a>
+          <a href="/decision-foundation">Decision Foundation</a>
+          <a href="/">English</a>
+          <a href="/admin.html">Sign in</a>
+          <a class="essay-button essay-button-small" href="/admin.html">Get started &rarr;</a>
+        </div>
+      </nav>
+
+      <main>
+        <header class="essay-hero">
+          <h1>
+            人に見せる前に、
+            <br />
+            本当の反応をシミュレーションする。
+          </h1>
+          <p class="essay-lede">
+            Agent Simulation API は、メッセージ、投稿、LP、オファー、プロダクト案、事業案を公開・送信・開発する前に、人間がどう受け取るかを大量にシミュレーションするためのAPIです。
+          </p>
+          <div class="essay-actions">
+            <a class="essay-button" href="/admin.html">クレジットで始める &rarr;</a>
+            <a class="essay-link" href="/ja/docs">日本語Docsを見る</a>
+          </div>
+        </header>
+
+        <section class="essay-section">
+          <h2>課題</h2>
+          <p>
+            多くのAIは、それっぽい回答を1つ返します。でも意思決定で本当に知りたいのは、自分が出そうとしているものが、相手にどう解釈されるかです。自分では明確な文章でも、受け手には怪しい、面白い、安っぽい、信頼できる、意味が分からない、と全く違う形で受け取られます。
+          </p>
+        </section>
+
+        <section class="essay-section">
+          <h2>プロダクト</h2>
+          <p>
+            Agent Simulation API は、対象となるオーディエンスの反応をシミュレーションし、誰が興味を持つのか、誰が疑うのか、どこで誤解するのか、どんな言葉で本音を言うのかを、分布と生の声として返します。Claude Code、Codex、Cursor、Hermes Agent、OpenClaw、スクリプト、自社プロダクトから利用できます。
+          </p>
+        </section>
+
+        <section class="essay-section">
+          <h2>用途</h2>
+          <ul class="essay-feature-list">
+            <li><span>コンテンツ公開前チェック</span> &mdash; 投稿、記事、広告、GEOページを出す前に、どう受け取られるかを見る。</li>
+            <li><span>メッセージの意思決定</span> &mdash; 営業DM、フォローアップ、投資家向け連絡、ユーザーインタビュー依頼を送る前に比較する。</li>
+            <li><span>LP・オファー検証</span> &mdash; LP、価格ページ、機能説明、ローンチ文面が、買い手にどう見えるかを確認する。</li>
+            <li><span>新規事業アイデア検証</span> &mdash; どこで欲しくなるのか、どこで疑われるのか、どこで支払意欲が消えるのかを見る。</li>
+            <li><span>自社プロダクトへの組み込み</span> &mdash; 自分たちのワークフロー、調査ツール、代理店ツール、意思決定システムにシミュレーション機能を入れる。</li>
+          </ul>
+        </section>
+
+        <section class="essay-section">
+          <h2>使い方</h2>
+          <ol class="essay-steps">
+            <li>
+              <div>1. 成果物を渡す</div>
+              <p>人に見せる文章、ページ、投稿、オファー、計画、事業案をそのまま渡します。</p>
+            </li>
+            <li>
+              <div>2. 対象者を定義する</div>
+              <p>誰の反応を見たいのかを、広い公開対象から狭い買い手層まで指定します。</p>
+            </li>
+            <li>
+              <div>3. シミュレーションする</div>
+              <p>APIが複数のエージェント反応を並列に生成し、分布と本音の声にまとめます。</p>
+            </li>
+            <li>
+              <div>4. 結果を使う</div>
+              <p>JSONまたはMarkdownで出力し、次のエージェント会話、資料、意思決定に使います。</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="essay-section">
+          <h2>出力例</h2>
+          <div class="essay-output">
+            <div>
+              <span>興味はあるが、まだ疑っている</span>
+              <strong>38%</strong>
+            </div>
+            <div>
+              <span>具体例を見ないと判断できない</span>
+              <strong>24%</strong>
+            </div>
+            <div>
+              <span>価値をすぐ理解した</span>
+              <strong>19%</strong>
+            </div>
+            <div>
+              <span>ただのプロンプトラッパーだと思った</span>
+              <strong>12%</strong>
+            </div>
+            <div>
+              <span>価格や導入方法が分からない</span>
+              <strong>7%</strong>
+            </div>
+          </div>
+          <blockquote class="essay-quote">
+            「やりたいことは分かる。導入が簡単で、ただのAIっぽい感想じゃなくて本当に反応の分布が見えるなら、一回試してみたい。」
+          </blockquote>
+        </section>
+
+        <section class="essay-section">
+          <h2>対象ユーザー</h2>
+          <p>
+            まずは、AIエージェントを日常的に使っている個人開発者、起業家、マーケター、代理店、プロダクト担当者向けです。チームや企業では、コンテンツ公開前チェック、新規事業検証、顧客向けメッセージ検証、外部データを使った高精度シミュレーションに使えます。
+          </p>
+        </section>
+
+        <section class="essay-section">
+          <h2>料金</h2>
+          <p>
+            セルフサーブはクレジット制です。日常的な意思決定に使える軽いシミュレーションは安く、外部データ、顧客データ、厳密なセキュリティ、特定業界向けのオーディエンス構築が必要な場合はエンタープライズ対応になります。
+          </p>
+          <div class="essay-pricing">
+            <div><strong>$20</strong><span>スタータークレジット</span></div>
+            <div><strong>$99</strong><span>継続利用向け</span></div>
+            <div><strong>$299</strong><span>チーム・代理店向け</span></div>
+            <div><strong>Custom</strong><span>外部データ・企業向け</span></div>
+          </div>
+          <a class="essay-button" href="/admin.html">アカウントを作成する &rarr;</a>
+        </section>
+
+        <section class="essay-section">
+          <h2>API quickstart</h2>
+          <pre class="essay-code"><code>curl -s -X POST "https://agent-simulation-api.vercel.app/api/simulate" \
+  -H "content-type: application/json" \
+  -H "x-api-key: $AGENT_SIMULATION_API_KEY" \
+  -d '{
+    "objective": "Should we publish this landing page?",
+    "artifact": { "type": "landing_page", "content": "..." },
+    "audience": { "description": "founders, marketers, agencies, and AI-agent users" },
+    "simulation": { "target_n": 100, "mode": "standard" }
+  }'</code></pre>
+        </section>
+
+        <section class="essay-section">
+          <h2>Decision Foundation</h2>
+          <p>
+            Decision Foundation は無料の補助スキルです。何をシミュレーションすべきか分からないときに、選択肢を構造的に整理します。Agent Simulation APIとは別プロダクトですが、組み合わせると強い意思決定フローになります。
+          </p>
+          <a class="essay-link" href="/decision-foundation">Decision Foundationを見る</a>
+        </section>
+
+        <section class="essay-section">
+          <h2>FAQ</h2>
+          <div class="essay-faq">
+            <div>
+              <h3>これはアンケートの代替ですか？</h3>
+              <p>すべてのケースで代替するものではありません。まずは公開前・送信前の高速な反応チェックです。外部データを使う企業向けでは、より具体的な対象者に近づけます。</p>
+            </div>
+            <div>
+              <h3>AIエージェントから使えますか？</h3>
+              <p>使えます。Docs、APIキー、シミュレーションしたい成果物を渡せば、Claude Code、Codex、Cursorなどから利用できます。</p>
+            </div>
+            <div>
+              <h3>結果はスコアですか？</h3>
+              <p>いいえ。価値があるのは、反応の分布と、その背後にある本音の声です。</p>
+            </div>
+            <div>
+              <h3>最初に誰が使うべきですか？</h3>
+              <p>投稿、送信、販売、公開、ポジショニングを頻繁に行い、1つの誤解が損失になる人です。</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="essay-footer">
+        <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Agent Simulation API</div>
+      </footer>
+    </div>
+  </body>
+</html>

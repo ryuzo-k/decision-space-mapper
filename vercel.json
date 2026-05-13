@@ -15,6 +15,14 @@
       "destination": "/site/simulation.html"
     },
     {
+      "source": "/ja",
+      "destination": "/site/simulation-ja.html"
+    },
+    {
+      "source": "/ja/docs",
+      "destination": "/site/docs-ja.html"
+    },
+    {
       "source": "/decision-foundation",
       "destination": "/site/index.html"
     },
