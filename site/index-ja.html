@@ -10,104 +10,129 @@
     />
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
-    <nav class="topbar" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Decision Foundation home">
-        <span class="brand-mark"></span>
-        <span>Decision Foundation</span>
-      </a>
-      <div class="nav-links">
-        <a href="#install">Install</a>
-        <a href="#workflow">Workflow</a>
-        <a href="/decision-foundation">English</a>
-        <a href="https://github.com/ryuzo-k/decision-space-mapper">GitHub</a>
-      </div>
-    </nav>
+  <body class="essay-page">
+    <div class="essay-shell docs-shell">
+      <nav class="essay-nav" aria-label="Primary navigation">
+        <a class="essay-brand" href="/decision-foundation/ja">Decision Foundation</a>
+        <div class="essay-nav-links">
+          <a href="#install">Install</a>
+          <a href="/decision-foundation">English</a>
+          <a href="https://github.com/ryuzo-k/decision-space-mapper">GitHub</a>
+        </div>
+      </nav>
 
-    <main>
-      <section class="hero hero-single" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow">Free agent skill</p>
-          <h1>決める前に、選択肢の全体像を出す。</h1>
-          <p class="lede">
+      <main>
+        <header class="essay-hero">
+          <h1>
+            決める前に、
+            <br />
+            選択肢の全体像を出す。
+          </h1>
+          <p class="essay-lede">
             Decision Foundation は、曖昧な会話や迷っている状態から、実際に取りうる候補パスを構造的に整理する無料スキルです。AIが1つのもっともらしい答えに飛ばず、意思決定の土台を作れるようにします。
           </p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#install">スキルを導入する</a>
-            <a class="ghost-action" href="https://github.com/ryuzo-k/decision-space-mapper">GitHubを見る</a>
+          <div class="essay-actions">
+            <a class="essay-button" href="#install">スキルを導入する &rarr;</a>
+            <a class="essay-link" href="https://github.com/ryuzo-k/decision-space-mapper">GitHubを見る</a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section class="workflow-section" id="workflow">
-        <div class="section-copy">
-          <p class="eyebrow">What it does</p>
-          <h2>意見ではなく、意思決定マップを作る。</h2>
-        </div>
-        <div class="workflow-grid">
-          <article>
-            <span>01</span>
-            <h3>文脈を回収する</h3>
-            <p>会話の中にある選択肢、制約、緊張、資産、対象者、望む結果を拾い上げます。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>候補パスを作る</h3>
-            <p>単なるカテゴリではなく、何を前面に出すか、何を隠すか、誰向けか、どんな行動につながるかまで含めたパスにします。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>次に検証するものを明確にする</h3>
-            <p>人の反応が重要なパスでは、次にテストすべき成果物と対象者を明確にします。シミュレーションは任意で、別プロダクトです。</p>
-          </article>
-        </div>
-      </section>
+        <section class="essay-section">
+          <h2>課題</h2>
+          <p>
+            AIは、速く答えすぎることがあります。何を作るか、何を書くか、何を売るか、何を公開するか、何を優先するかを聞いたとき、最初の答えはそれっぽく見えても、本当の選択肢の全体像を隠してしまいます。必要なのは、生成ではなく、会話の中にある選択肢、制約、トレードオフ、候補パスを回収することです。
+          </p>
+        </section>
 
-      <section class="example-section">
-        <div class="section-copy">
-          <p class="eyebrow">Example</p>
-          <h2>曖昧な迷いを、実行可能なパスにする。</h2>
-        </div>
-        <div class="example-layout">
-          <div class="distribution-card">
-            <h3>弱い出力</h3>
-            <p>「買い手向け、個人ブランディング、AIっぽさのどれかに寄せると良いです。」</p>
-          </div>
-          <div class="voice-card">
-            <h3>Decision Foundation の出力</h3>
-            <p><strong>事業獲得プロフィール:</strong> 買い手の課題、実績、サービス成果、問い合わせ導線を前面に出す。年齢、思想、サイドプロジェクトは抑える。</p>
-            <p><strong>思想・作家性プロフィール:</strong> 人間の心、文章、試作、視点の面白さを前面に出す。買い手への分かりやすさは弱くなることを許容する。</p>
-          </div>
-        </div>
-      </section>
+        <section class="essay-section">
+          <h2>スキル</h2>
+          <p>
+            Decision Foundation は、現在の文脈を読み取り、一貫した候補パスに整理します。それぞれのパスには、何を前面に出すか、何を抑えるか、誰向けか、どんな行動につながるか、そのパスが成立する条件は何かが含まれます。
+          </p>
+        </section>
 
-      <section class="install-section" id="install">
-        <div class="section-copy">
-          <p class="eyebrow">Install</p>
-          <h2>Claude Code、Codex、Cursorなどに貼って導入する。</h2>
-        </div>
-        <div class="install-card">
-          <div class="install-card-top">
+        <section class="essay-section">
+          <h2>できること</h2>
+          <ol class="essay-steps">
+            <li>
+              <div>1. 文脈を回収する</div>
+              <p>会話の中にある選択肢、制約、資産、緊張、対象者、目標、未解決の問いを拾います。</p>
+            </li>
+            <li>
+              <div>2. 候補パスを作る</div>
+              <p>ゆるいカテゴリではなく、実行可能で意味のある候補パスとして整理します。</p>
+            </li>
+            <li>
+              <div>3. 次に検証するものを明確にする</div>
+              <p>人の反応が重要なパスでは、次にテストすべき成果物と対象者を明確にします。</p>
+            </li>
+            <li>
+              <div>4. 意思決定を地に足のついたものにする</div>
+              <p>最初から綺麗なコピーを書くのではなく、ユーザー自身の文脈と選択肢を整理します。</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="essay-section">
+          <h2>出力例</h2>
+          <div class="essay-output">
             <div>
-              <p class="mini-label">Auto install</p>
-              <h2>Agent-native setup</h2>
+              <span>事業獲得プロフィール</span>
+              <strong>買い手への明確さ</strong>
             </div>
-            <button id="copy-install-prompt" type="button">Copy</button>
+            <div>
+              <span>思想・作家性プロフィール</span>
+              <strong>好みと人格</strong>
+            </div>
+            <div>
+              <span>AIネイティブ代理店プロフィール</span>
+              <strong>市場での位置づけ</strong>
+            </div>
+            <div>
+              <span>単一プロダクト特化アカウント</span>
+              <strong>コンバージョン重視</strong>
+            </div>
           </div>
-          <pre><code id="install-prompt"></code></pre>
-          <button class="command-button" id="copy-skills-command" type="button">Copy command only</button>
-        </div>
-      </section>
+          <blockquote class="essay-quote">
+            出力の目的は、考えうるパスを見えるようにすることです。選択肢の全体像を出す前に、1つの答えが明らかであるかのように振る舞うべきではありません。
+          </blockquote>
+        </section>
 
-      <section class="usecase-section">
-        <div class="section-copy">
-          <p class="eyebrow">Separate product</p>
-          <h2>人の反応を検証したい場合。</h2>
-          <p>Decision Foundation は無料の選択肢整理スキルです。Agent Simulation API は、人間の反応をシミュレーションする別の有料プロダクトです。</p>
-        </div>
-        <a class="primary-action" href="/ja">Agent Simulation APIを見る</a>
-      </section>
-    </main>
+        <section class="essay-section" id="install">
+          <h2>Install</h2>
+          <p>
+            Claude Code、Codex、Cursor、Hermes Agentなど、ターミナルを扱えるAIエージェントに貼ってください。
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Agent-native setup</strong>
+              <button class="docs-copy-button" id="copy-install-prompt" type="button">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="install-prompt"></code></pre>
+          </div>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Command only</strong>
+              <button class="docs-copy-button" id="copy-skills-command" type="button">Copy</button>
+            </div>
+            <pre class="essay-code"><code>npx skills add ryuzo-k/decision-space-mapper</code></pre>
+          </div>
+        </section>
+
+        <section class="essay-section">
+          <h2>別プロダクト</h2>
+          <p>
+            Decision Foundation は選択肢を整理するスキルです。Agent Simulation API は、メッセージ、オファー、LP、事業案などに対して人間がどう反応するかをシミュレーションする別の有料プロダクトです。
+          </p>
+          <a class="essay-link" href="/ja">Agent Simulation APIを見る</a>
+        </section>
+      </main>
+
+      <footer class="essay-footer">
+        <div>GitHub: <a href="https://github.com/ryuzo-k/decision-space-mapper">ryuzo-k/decision-space-mapper</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Decision Foundation</div>
+      </footer>
+    </div>
 
     <script src="/main.js"></script>
   </body>

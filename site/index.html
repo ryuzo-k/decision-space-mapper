@@ -6,109 +6,134 @@
     <title>Decision Foundation</title>
     <meta
       name="description"
-      content="A free agent skill that maps every viable path before you decide."
+      content="A free agent skill for mapping coherent options before making decisions."
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
-    <nav class="topbar" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Decision Foundation home">
-        <span class="brand-mark"></span>
-        <span>Decision Foundation</span>
-      </a>
-      <div class="nav-links">
-        <a href="#install">Install</a>
-        <a href="#workflow">Workflow</a>
-        <a href="/decision-foundation/ja">日本語</a>
-        <a href="https://github.com/ryuzo-k/decision-space-mapper">GitHub</a>
-      </div>
-    </nav>
+  <body class="essay-page">
+    <div class="essay-shell docs-shell">
+      <nav class="essay-nav" aria-label="Primary navigation">
+        <a class="essay-brand" href="/decision-foundation">Decision Foundation</a>
+        <div class="essay-nav-links">
+          <a href="#install">Install</a>
+          <a href="/decision-foundation/ja">日本語</a>
+          <a href="https://github.com/ryuzo-k/decision-space-mapper">GitHub</a>
+        </div>
+      </nav>
 
-    <main>
-      <section class="hero hero-single" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow">Free agent skill</p>
-          <h1>Map every viable path before you decide.</h1>
-          <p class="lede">
-            Decision Foundation turns messy context into coherent candidate paths, so your AI agent stops giving one narrow answer and starts showing the real decision space.
+      <main>
+        <header class="essay-hero">
+          <h1>
+            Map the decision space,
+            <br />
+            before choosing a path.
+          </h1>
+          <p class="essay-lede">
+            Decision Foundation is a free agent skill that turns messy context into coherent candidate paths. It helps your AI agent stop jumping to one plausible answer and show the options worth considering.
           </p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#install">Install the skill</a>
-            <a class="ghost-action" href="https://github.com/ryuzo-k/decision-space-mapper">Open GitHub</a>
+          <div class="essay-actions">
+            <a class="essay-button" href="#install">Install the skill &rarr;</a>
+            <a class="essay-link" href="https://github.com/ryuzo-k/decision-space-mapper">Open GitHub</a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section class="workflow-section" id="workflow">
-        <div class="section-copy">
-          <p class="eyebrow">What it does</p>
-          <h2>A decision map, not another opinion.</h2>
-        </div>
-        <div class="workflow-grid">
-          <article>
-            <span>01</span>
-            <h3>Recover the context</h3>
-            <p>The skill extracts your options, constraints, tensions, assets, hidden audience, and desired outcome from the conversation.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Build candidate paths</h3>
-            <p>Instead of atomic categories, it creates coherent paths: what to foreground, what to hide, who it is for, and what behavior follows.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Prepare the next test</h3>
-            <p>If a path depends on people, it names the artifact and audience you should test next. Simulation is optional and separate.</p>
-          </article>
-        </div>
-      </section>
+        <section class="essay-section">
+          <h2>The problem</h2>
+          <p>
+            AI often answers too quickly. When you ask what to build, write, sell, publish, prioritize, or choose, the first answer may sound reasonable while hiding the actual decision space. The useful step is often not generation. It is recovering the options, constraints, tradeoffs, and paths that were implicit in the conversation.
+          </p>
+        </section>
 
-      <section class="example-section">
-        <div class="section-copy">
-          <p class="eyebrow">Example</p>
-          <h2>From vague options to real paths.</h2>
-        </div>
-        <div class="example-layout">
-          <div class="distribution-card">
-            <h3>Weak output</h3>
-            <p>“You could focus on buyers, personal branding, or AI.”</p>
-          </div>
-          <div class="voice-card">
-            <h3>Decision Foundation output</h3>
-            <p><strong>Business acquisition profile:</strong> foreground the buyer problem, proof, service outcome, and contact path. De-emphasize age, side projects, and abstract philosophy.</p>
-            <p><strong>Full self / artist-founder profile:</strong> foreground the human mind work, taste, essays, prototypes, and unusual point of view. Accept that buyer clarity will be weaker.</p>
-          </div>
-        </div>
-      </section>
+        <section class="essay-section">
+          <h2>The skill</h2>
+          <p>
+            Decision Foundation reads the current context and maps coherent candidate paths. Each path includes what to foreground, what to de-emphasize, who it serves, what behavior follows, and what must be true for the path to work.
+          </p>
+        </section>
 
-      <section class="install-section" id="install">
-        <div class="section-copy">
-          <p class="eyebrow">Install</p>
-          <h2>Paste this into Claude Code, Codex, Cursor, or another agent.</h2>
-        </div>
-        <div class="install-card">
-          <div class="install-card-top">
+        <section class="essay-section">
+          <h2>What it does</h2>
+          <ol class="essay-steps">
+            <li>
+              <div>1. Recovers the context</div>
+              <p>It extracts options, constraints, assets, tensions, audience, goals, and unresolved questions from the conversation.</p>
+            </li>
+            <li>
+              <div>2. Builds candidate paths</div>
+              <p>It avoids loose categories and creates actionable paths with clear implications.</p>
+            </li>
+            <li>
+              <div>3. Names what to test next</div>
+              <p>If a path depends on human reactions, it identifies the artifact and audience that should be tested next.</p>
+            </li>
+            <li>
+              <div>4. Keeps the decision grounded</div>
+              <p>It does not write polished copy by default. It organizes the user's own context and possible choices.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="essay-section">
+          <h2>Example</h2>
+          <div class="essay-output">
             <div>
-              <p class="mini-label">Auto install</p>
-              <h2>Agent-native setup</h2>
+              <span>Business acquisition profile</span>
+              <strong>buyer clarity</strong>
             </div>
-            <button id="copy-install-prompt" type="button">Copy</button>
+            <div>
+              <span>Full self / artist-founder profile</span>
+              <strong>taste and identity</strong>
+            </div>
+            <div>
+              <span>AI-native agency profile</span>
+              <strong>market positioning</strong>
+            </div>
+            <div>
+              <span>Single-product account</span>
+              <strong>conversion focus</strong>
+            </div>
           </div>
-          <pre><code id="install-prompt"></code></pre>
-          <button class="command-button" id="copy-skills-command" type="button">Copy command only</button>
-        </div>
-      </section>
+          <blockquote class="essay-quote">
+            The output should make the possible paths visible. It should not pretend that one answer is obvious before the decision space has been mapped.
+          </blockquote>
+        </section>
 
-      <section class="usecase-section">
-        <div class="section-copy">
-          <p class="eyebrow">Separate product</p>
-          <h2>Need to test how people react?</h2>
-          <p>Decision Foundation is the free path-mapping skill. Agent Simulation API is a separate paid product for reaction testing.</p>
-        </div>
-        <a class="primary-action" href="/">Open Agent Simulation API</a>
-      </section>
-    </main>
+        <section class="essay-section" id="install">
+          <h2>Install</h2>
+          <p>
+            Paste this into Claude Code, Codex, Cursor, Hermes Agent, or another terminal-capable AI agent.
+          </p>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Agent-native setup</strong>
+              <button class="docs-copy-button" id="copy-install-prompt" type="button">Copy</button>
+            </div>
+            <pre class="essay-code"><code id="install-prompt"></code></pre>
+          </div>
+          <div class="docs-copy-card">
+            <div class="docs-copy-head">
+              <strong>Command only</strong>
+              <button class="docs-copy-button" id="copy-skills-command" type="button">Copy</button>
+            </div>
+            <pre class="essay-code"><code>npx skills add ryuzo-k/decision-space-mapper</code></pre>
+          </div>
+        </section>
 
-    <script src="./main.js"></script>
+        <section class="essay-section">
+          <h2>Separate product</h2>
+          <p>
+            Decision Foundation maps options. Agent Simulation API is a separate paid product for testing how people may react to a message, offer, page, product idea, or other artifact.
+          </p>
+          <a class="essay-link" href="/">Open Agent Simulation API</a>
+        </section>
+      </main>
+
+      <footer class="essay-footer">
+        <div>GitHub: <a href="https://github.com/ryuzo-k/decision-space-mapper">ryuzo-k/decision-space-mapper</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Decision Foundation</div>
+      </footer>
+    </div>
+
+    <script src="/main.js"></script>
   </body>
 </html>
