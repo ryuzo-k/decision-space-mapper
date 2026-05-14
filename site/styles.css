@@ -658,65 +658,27 @@ pre { margin: 0; }
   gap: 28px;
 }
 
-.human-machine-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 28px;
-  border-top: 1px solid var(--essay-line);
-  border-left: 1px solid var(--essay-line);
-}
-
-.human-machine-grid > div {
-  min-height: 260px;
-  padding: 22px;
-  border-right: 1px solid var(--essay-line);
-  border-bottom: 1px solid var(--essay-line);
-}
-
-.human-machine-grid h3 {
-  margin: 0 0 18px;
-  color: var(--essay-ink);
-  font-size: 22px;
-  font-weight: 650;
-}
-
-.human-machine-grid ul {
-  display: grid;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: var(--essay-mid);
-  font-size: 16px;
-  line-height: 1.65;
-}
-
-.human-machine-switcher[data-mode="human"] [data-panel="machine"],
-.human-machine-switcher[data-mode="machine"] [data-panel="human"] {
-  opacity: 0.34;
-}
-
-.human-machine-tabs {
+.site-mode-tabs {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 34px;
 }
 
-.human-machine-tabs button {
+.site-mode-tabs a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid var(--essay-line);
-  border-radius: 0;
   background: transparent;
   color: var(--essay-muted);
-  cursor: pointer;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 13px;
 }
 
-.human-machine-tabs button[aria-pressed="true"] {
+.site-mode-tabs a[aria-current="page"] {
   border-color: var(--essay-ink);
   color: var(--essay-ink);
 }
@@ -852,10 +814,6 @@ pre { margin: 0; }
   }
 
   .essay-pricing {
-    grid-template-columns: 1fr;
-  }
-
-  .human-machine-grid {
     grid-template-columns: 1fr;
   }
 

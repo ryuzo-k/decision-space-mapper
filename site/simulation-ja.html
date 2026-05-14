@@ -209,39 +209,6 @@ Yomira API keyを渡した場合は、必ず実際のAPIを呼んでください
         </section>
 
         <section class="essay-section">
-          <h2>Human / Machine</h2>
-          <p>
-            人間はLPを読めます。AIエージェントは machine version を読んで、Claude Code、Codex、Cursor、Hermes Agent などの中からAPIを使い始められます。
-          </p>
-          <div class="human-machine-switcher" data-mode="human">
-            <div class="human-machine-grid">
-              <div data-panel="human">
-                <h3>Human</h3>
-                <ul>
-                  <li>Yomira が何で、どの意思決定フローに入るのかを読む。</li>
-                  <li>アカウントを作り、クレジットを買い、APIキーをAIエージェントに渡す。</li>
-                  <li>選択肢を整理したいときは Mora を使う。</li>
-                  <li>反応分布と生の声が欲しいときは Yomira を使う。</li>
-                </ul>
-              </div>
-              <div data-panel="machine">
-                <h3>Machine</h3>
-                <ul>
-                  <li><a href="/llms.txt">/llms.txt</a> で machine-oriented な概要を読む。</li>
-                  <li><a href="/agent-start">/agent-start</a> でAPIキーとskillをセットアップする。</li>
-                  <li>APIを呼ぶ前に、成果物、対象者、チャネル、会社文脈、制約、既知の不安を集める。</li>
-                  <li>複数の具体案がある場合は、1つに絞る前にそれぞれをシミュレーションする。</li>
-                </ul>
-              </div>
-            </div>
-            <div class="human-machine-tabs" aria-label="Human and machine switcher">
-              <button type="button" data-mode-button="human" aria-pressed="true">● HUMAN</button>
-              <button type="button" data-mode-button="machine" aria-pressed="false">○ MACHINE</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="essay-section">
           <h2>FAQ</h2>
           <div class="essay-faq">
             <div>
@@ -268,6 +235,10 @@ Yomira API keyを渡した場合は、必ず実際のAPIを呼んでください
         <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
         <div>&copy; 2026 Yobou Inc. &mdash; Yomira</div>
       </footer>
+      <nav class="site-mode-tabs" aria-label="Site mode">
+        <a aria-current="page" href="/ja">● HUMAN</a>
+        <a href="/llms.txt">○ MACHINE</a>
+      </nav>
     </div>
     <script src="/docs.js"></script>
   </body>

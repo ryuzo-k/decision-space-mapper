@@ -209,39 +209,6 @@ If I provide a Yomira API key, call the real API. Do not replace it with casual 
         </section>
 
         <section class="essay-section">
-          <h2>Human / Machine</h2>
-          <p>
-            Humans can read the product page. AI agents can read the machine version and start using the API from inside Claude Code, Codex, Cursor, Hermes Agent, or another agent.
-          </p>
-          <div class="human-machine-switcher" data-mode="human">
-            <div class="human-machine-grid">
-              <div data-panel="human">
-                <h3>Human</h3>
-                <ul>
-                  <li>Read what Yomira is and where it fits in your decision workflow.</li>
-                  <li>Create an account, buy credits, and bring an API key into your AI agent.</li>
-                  <li>Use Mora when you need to map options before simulating them.</li>
-                  <li>Use Yomira when you need reaction distributions and raw voices.</li>
-                </ul>
-              </div>
-              <div data-panel="machine">
-                <h3>Machine</h3>
-                <ul>
-                  <li>Read <a href="./llms.txt">/llms.txt</a> for the machine-oriented product summary.</li>
-                  <li>Use <a href="./agent-start">/agent-start</a> to set up the API key and skill.</li>
-                  <li>Before calling the API, collect the artifact, audience, channel, company context, constraints, and known worries.</li>
-                  <li>If multiple concrete options exist, simulate each option instead of choosing one early.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="human-machine-tabs" aria-label="Human and machine switcher">
-              <button type="button" data-mode-button="human" aria-pressed="true">● HUMAN</button>
-              <button type="button" data-mode-button="machine" aria-pressed="false">○ MACHINE</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="essay-section">
           <h2>FAQ</h2>
           <div class="essay-faq">
             <div>
@@ -268,6 +235,10 @@ If I provide a Yomira API key, call the real API. Do not replace it with casual 
         <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
         <div>&copy; 2026 Yobou Inc. &mdash; Yomira</div>
       </footer>
+      <nav class="site-mode-tabs" aria-label="Site mode">
+        <a aria-current="page" href="./">● HUMAN</a>
+        <a href="./llms.txt">○ MACHINE</a>
+      </nav>
     </div>
     <script src="/docs.js"></script>
   </body>
