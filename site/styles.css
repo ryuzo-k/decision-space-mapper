@@ -659,10 +659,20 @@ pre { margin: 0; }
 }
 
 .site-mode-tabs {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 30;
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 34px;
+  transform: translateX(-50%);
+  padding: 6px;
+  border: 1px solid var(--essay-line);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 34px rgba(10, 10, 11, 0.08);
 }
 
 .site-mode-tabs a {
@@ -672,6 +682,7 @@ pre { margin: 0; }
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid var(--essay-line);
+  border-radius: 0;
   background: transparent;
   color: var(--essay-muted);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -824,5 +835,16 @@ pre { margin: 0; }
   .docs-copy-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .site-mode-tabs {
+    bottom: 14px;
+    max-width: calc(100vw - 28px);
+  }
+
+  .site-mode-tabs a {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 12px;
   }
 }
