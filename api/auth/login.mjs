@@ -24,6 +24,11 @@ export default async function handler(request, response) {
       user: {
         id: account.user.id,
         email: account.user.email,
+        name: account.user.name,
+        companyName: account.user.companyName,
+        companyUrl: account.user.companyUrl,
+        role: account.user.role,
+        intendedUse: account.user.intendedUse,
         planId: account.user.planId
       },
       apiKey: account.apiKey,

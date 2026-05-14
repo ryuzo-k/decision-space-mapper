@@ -53,9 +53,10 @@ export async function createCustomerAccess({ email, stripeCustomerId, credits = 
   return { user: normalizeUser(user), apiKey };
 }
 
-export async function createAccountForAuthUser({ authUserId, email, trialCredits = 20 }) {
+export async function createAccountForAuthUser({ authUserId, email, profile = {}, trialCredits = 20 }) {
   let user = await getUserByAuthUserId(authUserId);
   const now = new Date().toISOString();
+  const profilePatch = normalizeProfilePatch(profile);
 
   if (!user && email) {
     const existing = await supabaseRequest(`/profiles?email=eq.${encodeURIComponent(email)}&limit=1`);
@@ -65,6 +66,7 @@ export async function createAccountForAuthUser({ authUserId, email, trialCredits
         body: JSON.stringify({
           auth_user_id: authUserId,
           email,
+          ...profilePatch,
           updated_at: now
         })
       });
@@ -79,6 +81,7 @@ export async function createAccountForAuthUser({ authUserId, email, trialCredits
         auth_user_id: authUserId,
         email,
         plan_id: "free",
+        ...profilePatch,
         created_at: now,
         updated_at: now
       })
@@ -288,9 +291,35 @@ function normalizeUser(user) {
   return {
     id: user.id,
     email: user.email,
+    name: user.name,
+    companyName: user.company_name,
+    companyUrl: user.company_url,
+    role: user.role,
+    intendedUse: user.intended_use,
     stripeCustomerId: user.stripe_customer_id,
     planId: user.plan_id,
     createdAt: user.created_at,
     updatedAt: user.updated_at
   };
+}
+
+function normalizeProfilePatch(profile = {}) {
+  const patch = {};
+  if (profile.name !== undefined) patch.name = cleanText(profile.name);
+  if (profile.companyName !== undefined) patch.company_name = cleanText(profile.companyName);
+  if (profile.companyUrl !== undefined) patch.company_url = cleanUrl(profile.companyUrl);
+  if (profile.role !== undefined) patch.role = cleanText(profile.role);
+  if (profile.intendedUse !== undefined) patch.intended_use = cleanText(profile.intendedUse);
+  return patch;
+}
+
+function cleanText(value) {
+  const text = String(value || "").trim();
+  return text || null;
+}
+
+function cleanUrl(value) {
+  const text = cleanText(value);
+  if (!text) return null;
+  return /^https?:\/\//i.test(text) ? text : `https://${text}`;
 }

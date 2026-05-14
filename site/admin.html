@@ -109,7 +109,12 @@
         <p>Paste an offer, profile, post, landing page, or message. Simulate likely human reactions, see the clusters, then export the full result for your next conversation with Claude, Codex, Cursor, or your team.</p>
       </section>
       <section class="auth">
+        <label>Name <input id="name" type="text" placeholder="Your name" autocomplete="name" /></label>
         <label>Email <input id="email" type="email" placeholder="you@example.com" autocomplete="email" /></label>
+        <label>Company <input id="company_name" type="text" placeholder="Company or project name" autocomplete="organization" /></label>
+        <label>Company URL <input id="company_url" type="url" placeholder="https://example.com" autocomplete="url" /></label>
+        <label>Role <input id="role" type="text" placeholder="Founder, marketer, agency owner..." autocomplete="organization-title" /></label>
+        <label>What do you want to use Yomira for? <input id="intended_use" type="text" placeholder="Pre-release content checks, product validation, sales messages..." /></label>
         <label>Password <input id="password" type="password" placeholder="At least 8 characters" autocomplete="current-password" /></label>
         <button id="register">Create account</button>
         <button id="login" class="secondary">Log in</button>

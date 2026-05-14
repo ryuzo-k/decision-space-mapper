@@ -19,12 +19,22 @@ async function auth(mode) {
   button.disabled = true;
   statusEl.textContent = mode === "register" ? "Creating account..." : "Logging in...";
   try {
+    const body = {
+      email: document.querySelector("#email").value.trim(),
+      password: document.querySelector("#password").value
+    };
+
+    if (mode === "register") {
+      body.name = document.querySelector("#name").value.trim();
+      body.companyName = document.querySelector("#company_name").value.trim();
+      body.companyUrl = document.querySelector("#company_url").value.trim();
+      body.role = document.querySelector("#role").value.trim();
+      body.intendedUse = document.querySelector("#intended_use").value.trim();
+    }
+
     const data = await api(`/api/auth/${mode}`, {
       method: "POST",
-      body: {
-        email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value
-      }
+      body
     });
     localStorage.setItem("yomira_api_key", data.apiKey);
     localStorage.setItem("yomira_user", JSON.stringify(data.user));
