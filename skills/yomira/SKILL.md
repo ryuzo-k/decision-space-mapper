@@ -86,6 +86,33 @@ Do not use this as proof of reality. It is synthetic decision support.
 6. If the result is useful, suggest `mode: "standard"` and `target_n: 120`.
 7. Download or preserve the JSON/Markdown result so the user can continue discussing it with another agent.
 
+## Context-First Rule
+
+Yomira is not a prompt wrapper. The agent's first responsibility is to reconstruct the decision context before calling the API.
+
+Use the user's current agent environment as the context source:
+
+- current conversation
+- repo files and docs
+- pasted drafts
+- previous decisions in the thread
+- company/product descriptions
+- launch notes, customer notes, or user-provided source URLs
+- Mora candidate paths when present
+
+Do not ask the user to repeat context that is already visible. Extract it yourself.
+
+If the context is too thin for a useful simulation, ask only the missing questions needed to improve the run. Prefer 1-3 direct questions:
+
+```text
+Before I run Yomira, I need three things to avoid a generic simulation:
+1. Who exactly will see this?
+2. Where will they see it?
+3. What action do you want from them?
+```
+
+If the user is impatient, make labeled assumptions and run a small fast simulation first.
+
 ## Context Packet
 
 The simulation will be weak if the input is thin. Before calling the API, gather context from the current conversation, files, docs, or repo. Do not ask the user to re-explain what is already visible.
@@ -100,10 +127,25 @@ Prepare:
 - **distribution context:** X, Reddit, LinkedIn, email, sales DM, SEO/GEO, enterprise deck, app UI, etc.
 - **known worries:** the user's explicit fears, dislikes, or hypotheses.
 - **alternatives:** any candidate paths or variants being compared.
+- **data mode:** whether this is described, context-enriched, grounded, or calibrated.
+- **missing data:** what would make the simulation more reliable.
 
 If one of artifact, audience, or decision is missing, ask one concise question. If the user is in a hurry, make a labeled assumption and run a small simulation first.
 
 When used after Mora, convert each candidate path into a concrete artifact or stimulus before simulating. Do not simulate vague path names alone.
+
+## Data Modes
+
+Use these labels in your report:
+
+- **described:** the audience is described by the user or inferred from the conversation.
+- **context-enriched:** the agent used company context, product context, channel context, files, or docs.
+- **grounded:** the simulation used real source material such as CRM rows, customer notes, interviews, reviews, social posts, or supplied audience examples.
+- **calibrated:** Yomira predictions are being compared with real outcomes for this use case over time.
+
+Self-serve runs are usually described or context-enriched.
+
+Enterprise runs can be grounded or calibrated. For enterprise work, Yobou/Yomira helps construct the necessary audience dataset from real customer, market, or social data.
 
 ## Multi-Option Rule
 
@@ -165,6 +207,9 @@ Return:
 - Main distribution:
 
 ## What This Means
+- Data mode:
+- Confidence:
+- Missing data:
 - Buyer desire:
 - Suspicion:
 - Confusion:

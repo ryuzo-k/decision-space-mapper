@@ -257,6 +257,19 @@ curl -s -X POST "https://yomira-api.vercel.app/api/simulate" \
           </p>
         </section>
 
+        <section class="essay-section" id="context-first">
+          <h2>Context-first simulation</h2>
+          <p>
+            Yomiraは、ユーザーの作業文脈を持っているAIエージェント内で使われることを前提にしています。AIエージェントは、会話、ファイル、docs、プロダクトメモ、ローンチメモ、顧客メモ、Moraの候補パスから文脈を抽出してからAPIを呼びます。文脈が薄い場合は、雑にシミュレーションせず、必要な質問を1〜3個だけ聞くべきです。
+          </p>
+          <ul class="essay-feature-list">
+            <li><span>Described</span> &mdash; ユーザーまたはAIが対象者を文章で指定します。最速のセルフサーブモードです。</li>
+            <li><span>Context-enriched</span> &mdash; AIが会社、チャネル、商品、価格、実績、既知の不安をユーザーの作業環境から追加します。</li>
+            <li><span>Grounded</span> &mdash; CRM、顧客メモ、インタビュー、レビュー、X/social data、コミュニティ投稿、対象者例などの実データを使います。</li>
+            <li><span>Calibrated</span> &mdash; 予測と実際の結果を比較し、用途ごとに補正していきます。</li>
+          </ul>
+        </section>
+
         <section class="essay-section" id="simulation-method">
           <h2>シミュレーション技術</h2>
           <p>
@@ -273,7 +286,7 @@ curl -s -X POST "https://yomira-api.vercel.app/api/simulate" \
         <section class="essay-section" id="enterprise">
           <h2>エンタープライズ</h2>
           <p>
-            セルフサーブのクレジットは、高速な合成シミュレーション向けです。CRM、X/social data、顧客リスト、レビュー、社内データ、no-retention、厳密な調査用途はカスタム対応になります。
+            セルフサーブのクレジットは、高速な合成シミュレーション向けです。エンタープライズでは、grounded / calibrated simulation のために、Yomira側がCRM、X/social data、顧客リスト、レビュー、インタビュー、社内データ、市場データなどから必要なオーディエンスデータセットを構築します。
           </p>
         </section>
       </main>

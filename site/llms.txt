@@ -80,5 +80,8 @@ What Yomira returns:
 How to use well:
 - Always send the exact artifact, not just a description.
 - Include audience, channel, company/sender context, desired action, known worries, and alternatives.
+- Before calling the API, extract context from the current conversation, files, docs, repo, product notes, customer notes, and Mora candidate paths.
+- If context is thin, ask 1-3 missing questions instead of running a generic simulation.
+- Label the run as described, context-enriched, grounded, or calibrated.
 - If there are multiple concrete options, simulate each option.
 - Do not replace Yomira with casual AI guessing when an API key is available.

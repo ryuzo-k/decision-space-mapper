@@ -257,6 +257,19 @@ curl -s -X POST "https://yomira-api.vercel.app/api/simulate" \
           </p>
         </section>
 
+        <section class="essay-section" id="context-first">
+          <h2>Context-first simulation</h2>
+          <p>
+            Yomira is designed to be used inside an AI agent that already has the user's working context. The agent should extract context from the conversation, files, docs, product notes, launch notes, customer notes, and Mora candidate paths before it calls the API. If the context is thin, the agent should ask 1-3 missing questions instead of running a generic simulation.
+          </p>
+          <ul class="essay-feature-list">
+            <li><span>Described</span> &mdash; the user or agent describes the audience. This is the fastest self-serve mode.</li>
+            <li><span>Context-enriched</span> &mdash; the agent adds company, channel, product, pricing, proof, and known worries from the user's workspace.</li>
+            <li><span>Grounded</span> &mdash; the simulation uses real source material: CRM rows, customer notes, interviews, reviews, X/social data, community posts, or supplied audience examples.</li>
+            <li><span>Calibrated</span> &mdash; predictions are compared with real outcomes and corrected by use case over time.</li>
+          </ul>
+        </section>
+
         <section class="essay-section" id="simulation-method">
           <h2>Simulation method</h2>
           <p>
@@ -273,7 +286,7 @@ curl -s -X POST "https://yomira-api.vercel.app/api/simulate" \
         <section class="essay-section" id="enterprise">
           <h2>Enterprise</h2>
           <p>
-            Self-serve credits are for fast synthetic preflight checks. Grounded simulations with CRM data, X/social data, customer lists, reviews, private context packs, no-retention workflows, or high-stakes research are custom.
+            Self-serve credits are for fast synthetic preflight checks. Enterprise work is for grounded and calibrated simulation: Yomira helps construct the required audience dataset from CRM data, X/social data, customer lists, reviews, interviews, private context packs, and market source material.
           </p>
         </section>
       </main>
