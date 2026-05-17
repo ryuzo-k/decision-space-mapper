@@ -87,6 +87,24 @@
         background: white;
         color: var(--ink);
       }
+      .auth-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .auth-tabs button {
+        min-height: 42px;
+        border-color: var(--line);
+        background: white;
+        color: var(--ink);
+      }
+      .auth-tabs button[aria-pressed="true"] {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: white;
+      }
+      .hidden { display: none; }
       .status {
         min-height: 44px;
         margin-top: 14px;
@@ -109,16 +127,19 @@
         <p>Paste an offer, profile, post, landing page, or message. Simulate likely human reactions, see the clusters, then export the full result for your next conversation with Claude, Codex, Cursor, or your team.</p>
       </section>
       <section class="auth">
-        <label>Name <input id="name" type="text" placeholder="Your name" autocomplete="name" /></label>
+        <div class="auth-tabs" aria-label="Account mode">
+          <button id="show-register" type="button" aria-pressed="true">Create account</button>
+          <button id="show-login" type="button" aria-pressed="false">Log in</button>
+        </div>
+        <label class="register-only">Name <input id="name" type="text" placeholder="Your name" autocomplete="name" /></label>
         <label>Email <input id="email" type="email" placeholder="you@example.com" autocomplete="email" /></label>
-        <label>Company <input id="company_name" type="text" placeholder="Company or project name" autocomplete="organization" /></label>
-        <label>Company URL <input id="company_url" type="url" placeholder="https://example.com" autocomplete="url" /></label>
-        <label>Role <input id="role" type="text" placeholder="Founder, marketer, agency owner..." autocomplete="organization-title" /></label>
-        <label>What do you want to use Yomira for? <input id="intended_use" type="text" placeholder="Pre-release content checks, product validation, sales messages..." /></label>
-        <label>Password <input id="password" type="password" placeholder="At least 8 characters" autocomplete="current-password" /></label>
-        <button id="register">Create account</button>
-        <button id="login" class="secondary">Log in</button>
-        <div id="status" class="status">Create an account to get trial credits.</div>
+        <label class="register-only">Company <input id="company_name" type="text" placeholder="Company or project name" autocomplete="organization" /></label>
+        <label class="register-only">Company URL <input id="company_url" type="url" placeholder="https://example.com" autocomplete="url" /></label>
+        <label class="register-only">Role <input id="role" type="text" placeholder="Founder, marketer, agency owner..." autocomplete="organization-title" /></label>
+        <label class="register-only">What do you want to use Yomira for? <input id="intended_use" type="text" placeholder="Pre-release content checks, product validation, sales messages..." /></label>
+        <label>Password <input id="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" /></label>
+        <button id="submit-auth">Create account</button>
+        <div id="status" class="status">Create an account to get an API key. Buy credits from the dashboard when you are ready to run simulations.</div>
       </section>
     </main>
     <script src="./admin.js"></script>

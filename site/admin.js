@@ -1,8 +1,13 @@
 const API_BASE = location.protocol === "file:" ? "https://tryyomira.com" : "";
 const statusEl = document.querySelector("#status");
+const submitButton = document.querySelector("#submit-auth");
+const registerButton = document.querySelector("#show-register");
+const loginButton = document.querySelector("#show-login");
+let authMode = "register";
 
-document.querySelector("#register").addEventListener("click", () => auth("register"));
-document.querySelector("#login").addEventListener("click", () => auth("login"));
+registerButton.addEventListener("click", () => setAuthMode("register"));
+loginButton.addEventListener("click", () => setAuthMode("login"));
+submitButton.addEventListener("click", () => auth(authMode));
 
 const existingKey = localStorage.getItem("yomira_api_key") || localStorage.getItem("agent_sim_api_key");
 const existingUser = localStorage.getItem("yomira_user") || localStorage.getItem("agent_sim_user");
@@ -14,9 +19,23 @@ if (existingKey) {
   setTimeout(() => location.href = "./dashboard.html", 250);
 }
 
+function setAuthMode(mode) {
+  authMode = mode;
+  const isRegister = mode === "register";
+  registerButton.setAttribute("aria-pressed", String(isRegister));
+  loginButton.setAttribute("aria-pressed", String(!isRegister));
+  submitButton.textContent = isRegister ? "Create account" : "Log in";
+  document.querySelector("#password").autocomplete = isRegister ? "new-password" : "current-password";
+  document.querySelectorAll(".register-only").forEach((el) => {
+    el.classList.toggle("hidden", !isRegister);
+  });
+  statusEl.textContent = isRegister
+    ? "Create an account to get an API key. Buy credits from the dashboard when you are ready to run simulations."
+    : "Log in with your email and password to open your dashboard.";
+}
+
 async function auth(mode) {
-  const button = document.querySelector(mode === "register" ? "#register" : "#login");
-  button.disabled = true;
+  submitButton.disabled = true;
   statusEl.textContent = mode === "register" ? "Creating account..." : "Logging in...";
   try {
     const body = {
@@ -42,7 +61,7 @@ async function auth(mode) {
   } catch (error) {
     statusEl.textContent = error.message;
   } finally {
-    button.disabled = false;
+    submitButton.disabled = false;
   }
 }
 

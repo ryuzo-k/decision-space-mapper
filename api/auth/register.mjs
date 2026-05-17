@@ -25,7 +25,7 @@ export default async function handler(request, response) {
         role,
         intendedUse
       },
-      trialCredits: Number(process.env.TRIAL_CREDITS || 20)
+      trialCredits: Number(process.env.TRIAL_CREDITS || 0)
     });
     response.status(200).json({
       user: {

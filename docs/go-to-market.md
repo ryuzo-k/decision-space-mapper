@@ -114,7 +114,7 @@ Goal: high margin, fast cash, low support.
 
 ### Credit Pricing
 
-- Free trial: 20 credits
+- Public free trial: none by default; users create an account, get an API key, and buy credits from the dashboard.
 - $20 for 100 credits
 - $99 for 700 credits
 - $299 for 2,500 credits

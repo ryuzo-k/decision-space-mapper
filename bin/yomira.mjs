@@ -189,7 +189,7 @@ async function signup(args) {
 
   await finishSetup({ ...args, apiKey: data.apiKey });
   console.log(`Created Yomira account for ${data.user.email}.`);
-  console.log(`Trial credits: ${data.credits}`);
+  console.log(`Credits: ${data.credits}`);
 }
 
 function required(value, label) {

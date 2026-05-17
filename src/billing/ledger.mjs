@@ -53,7 +53,7 @@ export async function createCustomerAccess({ email, stripeCustomerId, credits = 
   return { user: normalizeUser(user), apiKey };
 }
 
-export async function createAccountForAuthUser({ authUserId, email, profile = {}, trialCredits = 20 }) {
+export async function createAccountForAuthUser({ authUserId, email, profile = {}, trialCredits = 0 }) {
   let user = await getUserByAuthUserId(authUserId);
   const now = new Date().toISOString();
   const profilePatch = normalizeProfilePatch(profile);
