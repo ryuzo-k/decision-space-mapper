@@ -640,6 +640,40 @@ pre { margin: 0; }
   line-height: 1.55;
 }
 
+.enterprise-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--essay-line);
+}
+
+.enterprise-contact strong,
+.enterprise-contact span {
+  display: block;
+}
+
+.enterprise-contact strong {
+  color: var(--essay-ink);
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.enterprise-contact span {
+  margin-top: 3px;
+  color: var(--essay-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.enterprise-contact code {
+  color: var(--essay-ink);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
 .essay-code {
   overflow: auto;
   margin: 0;
@@ -826,6 +860,15 @@ pre { margin: 0; }
 
   .essay-pricing {
     grid-template-columns: 1fr;
+  }
+
+  .enterprise-contact {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .enterprise-contact code {
+    white-space: normal;
   }
 
   .docs-card-section {
