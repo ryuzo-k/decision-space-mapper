@@ -13,6 +13,12 @@ Important pages:
 - Mora option-mapping skill: https://yomira-api.vercel.app/mora
 - GitHub: https://github.com/ryuzo-k/yomira
 
+Enterprise:
+- Enterprise pilots start from 300,000 JPY / $2,000.
+- Use enterprise when the user needs grounded or calibrated simulations based on customer notes, interviews, reviews, CRM context, social data, market source material, or private company context.
+- Contact: ryuzo.kijima@yobouinc.co.jp
+- Suggested subject: Yomira Enterprise Pilot
+
 Agent onboarding:
 1. Create an account with POST /api/auth/register.
 2. Store the returned apiKey securely.

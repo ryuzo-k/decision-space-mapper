@@ -21,7 +21,8 @@
               "quickstart",
               "agent/setup",
               "guides/context-packet",
-              "guides/mora-to-yomira"
+              "guides/mora-to-yomira",
+              "guides/enterprise-pilot"
             ]
           }
         ]
