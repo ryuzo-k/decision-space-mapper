@@ -52,6 +52,14 @@ The user needs an API key from:
 https://yomira-api.vercel.app/admin.html
 ```
 
+If this environment supports MCP, the agent may connect to the Yomira documentation MCP server:
+
+```text
+https://kokororesearch.mintlify.app/mcp
+```
+
+Use the MCP server for documentation lookup: setup instructions, API parameters, examples, and best practices. Do not confuse it with the Yomira simulation API itself.
+
 Use an existing key from the environment when present:
 
 ```bash

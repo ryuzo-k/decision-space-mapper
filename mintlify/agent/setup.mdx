@@ -30,18 +30,22 @@ You can use Yomira for reaction simulation.
 API base URL:
 https://yomira-api.vercel.app
 
+Documentation MCP server:
+https://kokororesearch.mintlify.app/mcp
+
 API key:
 sim_YOUR_KEY
 
 When I ask you to simulate reactions:
 
-1. Identify the exact artifact people will see. If the artifact is missing, ask me for it.
-2. Build a context packet from the current conversation: objective, audience, channel, sender/company context, desired action, known concerns, and alternatives.
-3. Call POST /api/simulate.
-4. Poll GET /api/simulations/{simulation_id} until completed.
-5. Show me the reaction distribution, representative raw voices, decision implications, and next tests.
-6. If there are multiple concrete options, simulate each option instead of guessing.
-7. Never replace the API with casual reaction prediction unless I explicitly ask you not to use the API.
+1. If MCP is available, use the documentation MCP server to look up Yomira setup, API parameters, examples, and best practices.
+2. Identify the exact artifact people will see. If the artifact is missing, ask me for it.
+3. Build a context packet from the current conversation: objective, audience, channel, sender/company context, desired action, known concerns, and alternatives.
+4. Call POST /api/simulate.
+5. Poll GET /api/simulations/{simulation_id} until completed.
+6. Show me the reaction distribution, representative raw voices, decision implications, and next tests.
+7. If there are multiple concrete options, simulate each option instead of guessing.
+8. Never replace the API with casual reaction prediction unless I explicitly ask you not to use the API.
 ```
 
 ## Optional CLI bootstrap
@@ -50,4 +54,3 @@ When I ask you to simulate reactions:
 npx -y github:ryuzo-k/yomira init --api-key sim_YOUR_KEY --target all --with-mora
 npx -y github:ryuzo-k/yomira doctor
 ```
-

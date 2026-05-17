@@ -13,6 +13,12 @@ Important pages:
 - Mora option-mapping skill: https://yomira-api.vercel.app/mora
 - GitHub: https://github.com/ryuzo-k/yomira
 
+AI agent docs access:
+- Mintlify docs: https://kokororesearch.mintlify.app/
+- Mintlify MCP server: https://kokororesearch.mintlify.app/mcp
+- Use the MCP server as a documentation/search MCP for Yomira setup, API parameters, examples, and best practices.
+- Do not treat the Mintlify MCP server as the Yomira simulation API itself. The simulation API remains https://yomira-api.vercel.app/api/simulate.
+
 Enterprise:
 - Enterprise pilots start from 300,000 JPY / $2,000.
 - Use enterprise when the user needs grounded or calibrated simulations based on customer notes, interviews, reviews, CRM context, social data, market source material, or private company context.
