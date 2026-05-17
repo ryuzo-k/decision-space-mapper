@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yomira Docs</title>
+    <title>Yomira 資料</title>
     <meta
       name="description"
       content="Yomira の日本語クイックスタート、AIエージェント導入プロンプト、API仕様、エクスポート、クレジット説明。"
@@ -12,13 +12,13 @@
   </head>
   <body class="essay-page">
     <div class="essay-shell docs-shell">
-      <nav class="essay-nav" aria-label="Primary navigation">
+      <nav class="essay-nav" aria-label="主要ナビゲーション">
         <a class="essay-brand" href="/ja">Yomira</a>
         <div class="essay-nav-links">
-          <a href="/ja">Home</a>
-          <a href="/docs">English</a>
-          <a href="/admin.html">Sign in</a>
-          <a class="essay-button essay-button-small" href="/admin.html">Get API key &rarr;</a>
+          <a href="/ja">ホーム</a>
+          <a href="/docs">英語</a>
+          <a href="/admin.html">ログイン</a>
+          <a class="essay-button essay-button-small" href="/admin.html">APIキーを取得 &rarr;</a>
         </div>
       </nav>
 
@@ -30,12 +30,12 @@
             反応をシミュレーションする。
           </h1>
           <p class="essay-lede">
-            このページは、Claude Code、Codex、Cursor、Hermes Agent、OpenClaw、スクリプト、自社プロダクトから Yomira を使うための日本語Docsです。
+            このページは、Claude Code、Codex、Cursor、Hermes Agent、OpenClaw、スクリプト、自社プロダクトから Yomira を使うための日本語資料です。
           </p>
           <div class="essay-actions">
             <a class="essay-button" href="/admin.html">アカウントを作成する &rarr;</a>
             <a class="essay-link" href="#agent-prompt">導入プロンプトをコピーする</a>
-            <a class="essay-link" href="/agent-start">Agent-native setup</a>
+            <a class="essay-link" href="/agent-start">AIエージェント向けセットアップ</a>
           </div>
         </header>
 
@@ -44,7 +44,7 @@
           <ol class="essay-steps">
             <li>
               <div>1. アカウントを作る</div>
-              <p>Dashboardを開き、アカウントを作成してAPIキーをコピーします。</p>
+              <p>管理画面を開き、アカウントを作成してAPIキーをコピーします。</p>
             </li>
             <li>
               <div>2. AIに導入プロンプトを貼る</div>
@@ -62,39 +62,39 @@
         </section>
 
         <section class="essay-section" id="official-skill">
-          <h2>公式skill</h2>
+          <h2>公式スキル</h2>
           <p>
-            公式skillは、どの場面でAPIを使うか、どうコンテキストを集めるか、どう結果をpollするか、そしてAPIを使わずに雑な予測で代替しないことをAIエージェントに教えます。
+            公式スキルは、どの場面でAPIを使うか、どう文脈を集めるか、どう結果を確認するか、そしてAPIを使わずに雑な予測で代替しないことをAIエージェントに教えます。
           </p>
           <div class="docs-copy-card">
             <div class="docs-copy-head">
-              <strong>公式Yomira skillを導入する</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="official-skill-prompt-ja">Copy</button>
+              <strong>公式Yomiraスキルを導入する</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="official-skill-prompt-ja">コピー</button>
             </div>
-            <pre class="essay-code"><code id="official-skill-prompt-ja">このGitHub repoから、公式のYomira skillを導入してください。
+            <pre class="essay-code"><code id="official-skill-prompt-ja">このGitHubリポジトリから、公式のYomiraスキルを導入してください。
 https://github.com/ryuzo-k/yomira/tree/main/skills/yomira
 
-導入後は、私がメッセージ、投稿、LP、オファー、価格ページ、プロダクト案、意思決定候補への反応をシミュレーションしてほしいと言ったときに、このskillを使ってください。
+導入後は、私がメッセージ、投稿、LP、オファー、価格ページ、プロダクト案、意思決定候補への反応をシミュレーションしてほしいと言ったときに、このスキルを使ってください。
 
-Yomira API keyを渡した場合は、必ず実際のAPIを呼んでください。私が明示的に「APIを使わないで」と言わない限り、あなた自身の雑な反応予測で代替しないでください。</code></pre>
+YomiraのAPIキーを渡した場合は、必ず実際のAPIを呼んでください。私が明示的に「APIを使わないで」と言わない限り、あなた自身の雑な反応予測で代替しないでください。</code></pre>
           </div>
         </section>
 
         <section class="essay-section" id="agent-onboarding">
           <h2>AIエージェントから登録する</h2>
           <p>
-            Yomiraは、ターミナルを使えるAIエージェントからもアカウント作成できます。メール、パスワード、APIキーの所有者はユーザーです。AIエージェントは、signupリクエストの作成、APIキー取得、skill導入、API確認まで実行できます。
+            Yomiraは、ターミナルを使えるAIエージェントからもアカウント作成できます。メール、パスワード、APIキーの所有者はユーザーです。AIエージェントは、登録リクエストの作成、APIキー取得、スキル導入、API確認まで実行できます。
           </p>
           <p>
-            MCP対応のAIエージェントでは、Yomira docs用MCP server <code>https://docs.tryyomira.com/mcp</code> を接続できます。Yomiraのセットアップ、API parameters、examples、best practicesを検索してから、Yomira APIを呼びます。
+            MCP対応のAIエージェントでは、Yomira資料用のMCPサーバー <code>https://docs.tryyomira.com/mcp</code> を接続できます。Yomiraのセットアップ、APIパラメータ、使用例、推奨手順を検索してから、Yomira APIを呼びます。
           </p>
           <p>
-            最短で使う場合は、<a href="/agent-start">Agent Start</a> を開き、セットアッププロンプトを Claude Code、Codex、Cursor、Hermes Agent などに貼ってください。
+            最短で使う場合は、<a href="/agent-start">AIエージェント向けセットアップ</a> を開き、セットアッププロンプトを Claude Code、Codex、Cursor、Hermes Agent などに貼ってください。
           </p>
           <div class="docs-copy-card">
             <div class="docs-copy-head">
               <strong>エージェントからアカウントを作成する</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="agent-signup-ja">Copy</button>
+              <button class="docs-copy-button" type="button" data-copy-target="agent-signup-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="agent-signup-ja">curl -s -X POST "https://tryyomira.com/api/auth/register" \
   -H "content-type: application/json" \
@@ -109,12 +109,12 @@ Yomira API keyを渡した場合は、必ず実際のAPIを呼んでください
   }'</code></pre>
           </div>
           <p>
-            レスポンスには <code>apiKey</code>、<code>credits</code>、<code>user</code> が含まれます。APIキーはsecretとして保存し、その後Yomira skillを導入してください。
+            レスポンスには <code>apiKey</code>、<code>credits</code>、<code>user</code> が含まれます。APIキーはシークレットとして保存し、その後Yomiraスキルを導入してください。
           </p>
           <div class="docs-copy-card">
             <div class="docs-copy-head">
               <strong>APIキー取得後にCLIでセットアップする</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="yomira-cli-init-ja">Copy</button>
+              <button class="docs-copy-button" type="button" data-copy-target="yomira-cli-init-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="yomira-cli-init-ja">npx -y github:ryuzo-k/yomira init --api-key sim_YOUR_KEY --target all --with-mora
 npx -y github:ryuzo-k/yomira doctor</code></pre>
@@ -124,19 +124,19 @@ npx -y github:ryuzo-k/yomira doctor</code></pre>
         <section class="essay-section" id="agent-prompt">
           <h2>AIエージェント導入プロンプト</h2>
           <p>
-            <code>sim_YOUR_KEY</code> をDashboardのAPIキーに置き換えて、AIエージェントに貼ってください。これで、ユーザーが自分でAPIを叩かなくても使える状態になります。
+            <code>sim_YOUR_KEY</code> を管理画面のAPIキーに置き換えて、AIエージェントに貼ってください。これで、ユーザーが自分でAPIを叩かなくても使える状態になります。
           </p>
           <div class="docs-copy-card">
             <div class="docs-copy-head">
               <strong>Claude Code / Codex / Cursor / Hermes Agent / OpenClaw 向け共通プロンプト</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="agent-setup-prompt-ja">Copy</button>
+              <button class="docs-copy-button" type="button" data-copy-target="agent-setup-prompt-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="agent-setup-prompt-ja">あなたは Yomira を使って、人間の反応シミュレーションを実行できます。
 
-API base URL:
+APIのベースURL:
 https://tryyomira.com
 
-API key:
+APIキー:
 sim_YOUR_KEY
 
 私が「反応をシミュレーションして」「どちらを送るべきか見て」「公開前チェックして」などと言ったら、次の手順で進めてください。
@@ -150,7 +150,7 @@ sim_YOUR_KEY
    - audience.description
    - simulation.mode: 最初は "fast"、重要な意思決定では "standard"
    - simulation.target_n: 最初は40、重要な意思決定では120
-4. GET /api/simulations/{simulation_id} を completed になるまでpollしてください。
+4. GET /api/simulations/{simulation_id} を呼び、ステータスが completed になるまで結果を確認してください。
 5. 結果として、必ず以下を見せてください。
    - simulation_id
    - 反応分布
@@ -174,14 +174,14 @@ sim_YOUR_KEY
         </section>
 
         <section class="essay-section" id="api">
-          <h2>API quickstart</h2>
+          <h2>APIの使い方</h2>
           <p>
-            APIは非同期です。ジョブを作成し、完了までpollし、JSONまたはMarkdownでダウンロードします。
+            APIは非同期です。ジョブを作成し、完了まで確認し、JSONまたはMarkdown形式でダウンロードします。
           </p>
           <div class="docs-copy-card">
             <div class="docs-copy-head">
               <strong>シミュレーションを作成する</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="curl-create-ja">Copy</button>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-create-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="curl-create-ja">export YOMIRA_API_KEY="sim_..."
 
@@ -208,8 +208,8 @@ curl -s -X POST "https://tryyomira.com/api/simulate" \
 
           <div class="docs-copy-card">
             <div class="docs-copy-head">
-              <strong>結果をpollする</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="curl-poll-ja">Copy</button>
+              <strong>結果を確認する</strong>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-poll-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="curl-poll-ja">curl -s "https://tryyomira.com/api/simulations/SIMULATION_ID" \
   -H "x-api-key: $YOMIRA_API_KEY"</code></pre>
@@ -236,7 +236,7 @@ curl -s -X POST "https://tryyomira.com/api/simulate" \
           <div class="docs-copy-card">
             <div class="docs-copy-head">
               <strong>Markdownをダウンロード</strong>
-              <button class="docs-copy-button" type="button" data-copy-target="curl-export-ja">Copy</button>
+              <button class="docs-copy-button" type="button" data-copy-target="curl-export-ja">コピー</button>
             </div>
             <pre class="essay-code"><code id="curl-export-ja">curl -s "https://tryyomira.com/api/simulations/SIMULATION_ID?format=markdown" \
   -H "x-api-key: $YOMIRA_API_KEY"</code></pre>
@@ -246,10 +246,10 @@ curl -s -X POST "https://tryyomira.com/api/simulate" \
         <section class="essay-section" id="modes">
           <h2>モードとクレジット</h2>
           <div class="essay-pricing docs-pricing">
-            <div><strong>Fast</strong><span>40人。5 credits。最初の確認用。</span></div>
-            <div><strong>Standard</strong><span>120人。20 credits。重要な公開・送信判断向け。</span></div>
-            <div><strong>Deep</strong><span>300人。60 credits。より大きな比較向け。</span></div>
-            <div><strong>Report</strong><span>1,000人。250 credits。レポート用途の合成カバレッジ。</span></div>
+            <div><strong>高速</strong><span>40人。5クレジット。最初の確認用。</span></div>
+            <div><strong>標準</strong><span>120人。20クレジット。重要な公開・送信判断向け。</span></div>
+            <div><strong>深掘り</strong><span>300人。60クレジット。より大きな比較向け。</span></div>
+            <div><strong>レポート</strong><span>1,000人。250クレジット。レポート用途の合成カバレッジ。</span></div>
           </div>
         </section>
 
@@ -261,42 +261,42 @@ curl -s -X POST "https://tryyomira.com/api/simulate" \
         </section>
 
         <section class="essay-section" id="context-first">
-          <h2>Context-first simulation</h2>
+          <h2>文脈を先に集めるシミュレーション</h2>
           <p>
-            Yomiraは、ユーザーの作業文脈を持っているAIエージェント内で使われることを前提にしています。AIエージェントは、会話、ファイル、docs、プロダクトメモ、ローンチメモ、顧客メモ、Moraの候補パスから文脈を抽出してからAPIを呼びます。文脈が薄い場合は、雑にシミュレーションせず、必要な質問を1〜3個だけ聞くべきです。
+            Yomiraは、ユーザーの作業文脈を持っているAIエージェント内で使われることを前提にしています。AIエージェントは、会話、ファイル、資料、プロダクトメモ、ローンチメモ、顧客メモ、Moraの候補パスから文脈を抽出してからAPIを呼びます。文脈が薄い場合は、雑にシミュレーションせず、必要な質問を1〜3個だけ聞くべきです。
           </p>
           <ul class="essay-feature-list">
-            <li><span>Described</span> &mdash; ユーザーまたはAIが対象者を文章で指定します。最速のセルフサーブモードです。</li>
-            <li><span>Context-enriched</span> &mdash; AIが会社、チャネル、商品、価格、実績、既知の不安をユーザーの作業環境から追加します。</li>
-            <li><span>Grounded</span> &mdash; CRM、顧客メモ、インタビュー、レビュー、X/social data、コミュニティ投稿、対象者例などの実データを使います。</li>
-            <li><span>Calibrated</span> &mdash; 予測と実際の結果を比較し、用途ごとに補正していきます。</li>
+            <li><span>文章指定</span> &mdash; ユーザーまたはAIが対象者を文章で指定します。最速のセルフサーブモードです。</li>
+            <li><span>文脈拡張</span> &mdash; AIが会社、チャネル、商品、価格、実績、既知の不安をユーザーの作業環境から追加します。</li>
+            <li><span>実データ活用</span> &mdash; CRM、顧客メモ、インタビュー、レビュー、XやSNS上の情報、コミュニティ投稿、対象者例などの実データを使います。</li>
+            <li><span>補正</span> &mdash; 予測と実際の結果を比較し、用途ごとに補正していきます。</li>
           </ul>
         </section>
 
         <section class="essay-section" id="simulation-method">
           <h2>シミュレーション技術</h2>
           <p>
-            現在のセルフサーブ版は、LLMベースの合成人間反応シミュレーターです。コンテキストパケットを作り、対象層に近いaudience agentsを構成し、並列バッチで本音の反応を生成し、それを分布、クラスター、代表的な声、エクスポートにまとめます。高速な意思決定支援には使えますが、これが最終形ではありません。
+            現在のセルフサーブ版は、LLMベースの合成人間反応シミュレーターです。コンテキストパケットを作り、対象層に近い対象者エージェントを構成し、並列バッチで本音の反応を生成し、それを分布、クラスター、代表的な声、エクスポートにまとめます。高速な意思決定支援には使えますが、これが最終形ではありません。
           </p>
           <ul class="essay-feature-list">
-            <li><span>Level 1: Described audience</span> &mdash; 現在の基本。ユーザーまたはAIが対象層を文章で指定します。</li>
-            <li><span>Level 2: Context-enriched audience</span> &mdash; AIが会社情報、チャネル、過去会話、docs、顧客仮説を集めてからAPIを呼びます。</li>
-            <li><span>Level 3: Grounded audience</span> &mdash; CRM、顧客リスト、レビュー、インタビュー、X/social data、コミュニティ投稿などを元に母集団を作ります。</li>
-            <li><span>Level 4: Calibrated audience</span> &mdash; 実際の調査・インタビュー結果とsynthetic outputを比較し、用途やセグメントごとに補正します。</li>
+            <li><span>段階1: 文章指定の対象者</span> &mdash; 現在の基本。ユーザーまたはAIが対象層を文章で指定します。</li>
+            <li><span>段階2: 文脈で補強した対象者</span> &mdash; AIが会社情報、チャネル、過去会話、資料、顧客仮説を集めてからAPIを呼びます。</li>
+            <li><span>段階3: 実データに基づく対象者</span> &mdash; CRM、顧客リスト、レビュー、インタビュー、XやSNS上の情報、コミュニティ投稿などを元に母集団を作ります。</li>
+            <li><span>段階4: 補正済みの対象者</span> &mdash; 実際の調査・インタビュー結果と仮想出力を比較し、用途やセグメントごとに補正します。</li>
           </ul>
         </section>
 
         <section class="essay-section" id="enterprise">
-          <h2>エンタープライズ</h2>
+          <h2>法人向け</h2>
           <p>
-            セルフサーブのクレジットは、高速な合成シミュレーション向けです。エンタープライズでは、grounded / calibrated simulation のために、Yomira側がCRM、X/social data、顧客リスト、レビュー、インタビュー、社内データ、市場データなどから必要なオーディエンスデータセットを構築します。
+            セルフサーブのクレジットは、高速な合成シミュレーション向けです。法人向けでは、実データに基づくシミュレーションや補正済みシミュレーションのために、Yomira側がCRM、XやSNS上の情報、顧客リスト、レビュー、インタビュー、社内データ、市場データなどから必要な対象者データセットを構築します。
           </p>
         </section>
       </main>
 
       <footer class="essay-footer">
-        <div>Contact: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
-        <div>&copy; 2026 Yobou Inc. &mdash; Yomira Docs</div>
+        <div>連絡先: <a href="mailto:ryuzo.kijima@yobouinc.co.jp">ryuzo.kijima@yobouinc.co.jp</a></div>
+        <div>&copy; 2026 Yobou Inc. &mdash; Yomira 資料</div>
       </footer>
     </div>
     <script src="/docs.js"></script>
