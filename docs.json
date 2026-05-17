@@ -58,6 +58,7 @@
       }
     ],
     "primary": {
+      "type": "button",
       "label": "Get API key",
       "href": "https://yomira-api.vercel.app/admin.html"
     }
