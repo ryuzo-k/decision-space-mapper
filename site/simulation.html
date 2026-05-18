@@ -24,23 +24,59 @@
       </nav>
 
       <main>
-        <header class="essay-hero">
-          <h1>
-            Build the audience first,
-            <br />
-            then simulate the reaction.
-          </h1>
-          <p class="essay-lede">
-            Yomira lets your AI agent collect working context from conversations, files, docs, and company materials, generate the right synthetic audience for the decision, and simulate how those people may privately react before you publish, send, or build.
-          </p>
-          <p class="essay-small-note">
-            Use it for DMs, launch posts, landing pages, pricing pages, product concepts, and any decision where the private reaction matters before the public result arrives.
-          </p>
-          <div class="essay-actions">
-            <a class="essay-button" href="./admin.html">Start with credits &rarr;</a>
-            <a class="essay-link" href="#enterprise">Enterprise pilot</a>
-            <a class="essay-link" href="https://docs.tryyomira.com/">Read the API docs</a>
+        <header class="essay-hero essay-hero-split">
+          <div class="essay-hero-copy">
+            <p class="essay-kicker">Reaction simulation API for AI agents</p>
+            <h1>
+              Simulate how people will react
+              <br />
+              before you send, publish, or launch.
+            </h1>
+            <p class="essay-lede">
+              Yomira lets your AI agent gather context, build the right audience, and run reaction simulations with raw voices, percentages, and exports.
+            </p>
+            <p class="essay-small-note">
+              Use it for DMs, launch posts, landing pages, pricing pages, product concepts, and any decision where the private reaction matters before the public result arrives.
+            </p>
+            <div class="essay-actions">
+              <a class="essay-button" href="./admin.html">Start with credits &rarr;</a>
+              <a class="essay-link" href="https://docs.tryyomira.com/">Copy agent setup</a>
+              <a class="essay-link" href="#enterprise">Enterprise pilot</a>
+            </div>
           </div>
+          <aside class="yomira-live-panel" aria-label="Yomira simulation example">
+            <div class="yomira-panel-head">
+              <span>Yomira analyzed Yomira</span>
+              <strong>n=100</strong>
+            </div>
+            <div class="yomira-panel-body">
+              <div class="yomira-panel-title">
+                <span>Question</span>
+                <p>Will builders understand and want an agent-native reaction simulation API?</p>
+              </div>
+              <div class="yomira-result-list">
+                <div>
+                  <strong>38%</strong>
+                  <span>Interested but cautious</span>
+                  <p>"I understand the value, but I need proof this is not just another prompt wrapper."</p>
+                </div>
+                <div>
+                  <strong>24%</strong>
+                  <span>Needs one concrete workflow</span>
+                  <p>"Show me exactly how Claude Code or Codex would use it before I pay."</p>
+                </div>
+                <div>
+                  <strong>19%</strong>
+                  <span>Ready to test</span>
+                  <p>"If setup is fast, I would use this before sending sales messages or launching pages."</p>
+                </div>
+              </div>
+              <div class="yomira-panel-footer">
+                <span>Raw voices + clusters + exportable JSON</span>
+                <a href="#live-example">See example</a>
+              </div>
+            </div>
+          </aside>
         </header>
 
         <section class="essay-section">
@@ -193,7 +229,7 @@ If I provide a Yomira API key, call the real API. Do not replace it with casual 
           </blockquote>
         </section>
 
-        <section class="essay-section">
+        <section class="essay-section" id="live-example">
           <h2>Real example</h2>
           <p>
             We simulated a simple workflow: a user installs the skill, gives an API key to Claude Code or Codex, and asks it to check a sales DM before sending. The API ran 40 simulated people.
