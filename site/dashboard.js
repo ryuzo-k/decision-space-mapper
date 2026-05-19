@@ -2,10 +2,87 @@ const API_BASE = location.protocol === "file:" ? "https://tryyomira.com" : "";
 const state = {
   apiKey: localStorage.getItem("yomira_api_key") || localStorage.getItem("agent_sim_api_key") || "",
   user: JSON.parse(localStorage.getItem("yomira_user") || localStorage.getItem("agent_sim_user") || "null"),
-  latest: null
+  latest: null,
+  template: "message"
 };
 
 const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+const templates = {
+  message: {
+    artifactType: "message",
+    objective: "Decide whether to send this message, revise it, or choose a different approach.",
+    artifact: "Hi - I saw you liked my post about agent-based reaction simulation. I am building Yomira, an API that lets AI agents simulate how real people might react to messages, content, landing pages, offers, and product ideas. It is only a day old, but I am using it on my own decisions already. Would you be open to trying it and giving honest feedback?",
+    audience: "A potential early user who liked a public post about agent-native decision making, probably interested in AI tools, founder tools, or simulation workflows.",
+    channel: "X DM after a lightweight public signal.",
+    desiredAction: "Reply with curiosity, ask for access, or give honest feedback instead of ignoring the message.",
+    senderContext: "The sender is the founder. The product is early, self-serve, API-first, and still being shaped with early users.",
+    concerns: "The recipient may feel sold to, may not understand what the API does, may think it is too early, or may not want a long founder DM.",
+    alternatives: "Short direct DM; longer context-heavy DM; ask one question first; send link immediately; offer to run one simulation for them.",
+    availableData: "Use the recipient's public signal and the message context only. No private data."
+  },
+  content: {
+    artifactType: "content",
+    objective: "Decide whether to publish this content and what reaction patterns it may create.",
+    artifact: "if you're making decisions inside Claude Code, Codex, Cursor, or Hermes Agent and want simulation-based feedback before you ship, send, publish, or price something, reach out. I am building Yomira.",
+    audience: "AI-native founders, indie hackers, marketers, agency owners, and operators who use AI agents in daily work.",
+    channel: "Public X / LinkedIn launch post.",
+    desiredAction: "Understand the product quickly, feel that the use case is real, and click through or DM.",
+    senderContext: "Yomira is early. The founder wants to find people who already make decisions inside AI tools and feel the pain of one-shot AI answers.",
+    concerns: "The phrase simulation-based feedback may sound vague. Some readers may assume it is another wrapper. Others may need a concrete example before caring.",
+    alternatives: "API-first post; founder story post; concrete example post; enterprise grounded-simulation post; free skill channel post.",
+    availableData: "Use public AI-builder audience assumptions only. No external audience data in this run."
+  },
+  landing: {
+    artifactType: "landing_page",
+    objective: "Decide whether this landing page makes people understand and trust Yomira enough to sign up or contact the founder.",
+    artifact: "Yomira lets your AI agent gather context, build the right audience, and run reaction simulations with raw voices, percentages, and exports. Use it before sending messages, publishing content, launching offers, testing pricing, or choosing product direction.",
+    audience: "Founders, marketers, agencies, product teams, and AI-agent users evaluating whether to try a new simulation API.",
+    channel: "Landing page viewed from X, docs, founder DM, or search.",
+    desiredAction: "Sign up, copy the agent setup prompt, buy credits, or book an enterprise pilot.",
+    senderContext: "The product sells self-serve credits and custom enterprise grounded simulations. It needs to look serious, useful, and not like a toy.",
+    concerns: "Visitors may doubt simulation accuracy, may not know what to paste, may worry the output is generic, or may not understand self-serve versus enterprise.",
+    alternatives: "Minimal essay LP; visual SaaS LP; API docs-first page; enterprise-first page; use-case-first page.",
+    availableData: "Use the landing-page copy and product positioning. No live analytics included."
+  },
+  product: {
+    artifactType: "product_direction",
+    objective: "Decide which Yomira product direction is most worth pursuing first.",
+    artifact: "Yomira could be sold as a self-serve API for AI agents, an enterprise grounded simulation product, a content preflight tool, a message preflight tool, or embedded infrastructure for other research/simulation products.",
+    audience: "Potential buyers including AI-native founders, agencies, marketers, enterprise innovation teams, product teams, and developers building agent-native products.",
+    channel: "Product strategy decision before launch and outreach.",
+    desiredAction: "Identify which direction creates real willingness to pay fastest without weakening the long-term research vision.",
+    senderContext: "The founder wants to earn revenue quickly but also build toward serious human-reaction simulation and decision support.",
+    concerns: "A generic API may be too abstract. Enterprise sales may be slow. Consumer self-serve may not pay enough. The strongest use case may require better data grounding.",
+    alternatives: "Self-serve API; enterprise pilots; content preflight; message preflight; product/venture validation; embedded API for other tools.",
+    availableData: "Use current product context, pricing, and launch intent. No customer interview dataset yet."
+  },
+  pricing: {
+    artifactType: "pricing",
+    objective: "Decide whether the current credit packs and enterprise line make sense.",
+    artifact: "Self-serve Yomira credits: $20 for 100 credits, $99 for 700 credits, $299 for 2,500 credits. Quick simulation uses 5 credits, standard uses 20, deep uses 60, and 1000-person report uses 250. Enterprise grounded simulations are custom.",
+    audience: "Individual founders, AI-agent users, agencies, marketers, developers, and enterprise buyers who may pay for reaction simulation.",
+    channel: "Pricing page and dashboard checkout.",
+    desiredAction: "Buy credits without overthinking, or understand when to contact for enterprise.",
+    senderContext: "The product needs high gross margin, quick self-serve revenue, and a clear path to higher-ticket grounded simulation work.",
+    concerns: "Users may not know what a credit means, may distrust output quality before paying, may want a free sample, or may be confused by enterprise versus self-serve.",
+    alternatives: "Credit packs only; monthly subscription; free trial; paid first simulation; enterprise-only; service-led pilots.",
+    availableData: "Use current credit costs and product assumptions. No full cost curve yet."
+  },
+  enterprise: {
+    artifactType: "enterprise_pilot",
+    objective: "Decide how to frame a grounded enterprise pilot for high-stakes decisions.",
+    artifact: "Yomira can build a grounded audience dataset from customer notes, CRM rows, reviews, interviews, X/social data, community posts, and market source material, then simulate reactions to concrete options before a company launches, publishes, prices, or changes positioning.",
+    audience: "Enterprise innovation teams, product marketing, communications, new business teams, agencies, and founders with high-stakes public or commercial decisions.",
+    channel: "Founder outreach, enterprise landing page, sales deck, or pilot proposal.",
+    desiredAction: "Book a call, share data sources, and agree to a paid pilot.",
+    senderContext: "Enterprise value comes from grounding the audience in real source data instead of only described synthetic context.",
+    concerns: "Buyers may ask about validity, confidentiality, methodology, procurement, and whether this is meaningfully better than research or surveys.",
+    alternatives: "$3k fast pilot; $10k grounded report; $30k+ enterprise pilot; agency-delivered simulation report; API-only integration.",
+    availableData: "This run is self-serve synthetic. Enterprise version would use supplied customer/market/social datasets."
+  }
+};
 
 if (!state.apiKey) location.href = "./admin.html";
 if (state.apiKey) localStorage.setItem("yomira_api_key", state.apiKey);
@@ -23,12 +100,19 @@ $("#run").addEventListener("click", runSimulation);
 $("#sample").addEventListener("click", loadSample);
 $("#download-json").addEventListener("click", () => downloadLatest("json"));
 $("#download-md").addEventListener("click", () => downloadLatest("markdown"));
+for (const button of $$("[data-template]")) {
+  button.addEventListener("click", () => applyTemplate(button.dataset.template));
+}
+for (const field of ["#objective", "#artifact", "#audience", "#channel", "#desired-action", "#sender-context", "#known-concerns", "#alternatives", "#available-data"]) {
+  $(field)?.addEventListener("input", updateContextPreview);
+}
 for (const button of document.querySelectorAll("[data-plan]")) {
   button.addEventListener("click", () => checkout(button.dataset.plan));
 }
 
 hydrate();
 claimCheckoutIfNeeded();
+applyTemplate("message");
 
 async function hydrate() {
   $("#account").textContent = state.user?.email || "";
@@ -122,13 +206,18 @@ async function runSimulation() {
   $("#run").disabled = true;
   $("#run-status").textContent = "Creating simulation job...";
   try {
+    const context = buildContextPacket();
     const job = await api("/api/simulate", {
       method: "POST",
       headers: { "x-api-key": state.apiKey },
       body: {
         objective: $("#objective").value,
-        artifact: { type: "product_or_content", content: $("#artifact").value },
-        audience: { description: $("#audience").value },
+        artifact: { type: $("#artifact-type").value || state.template || "artifact", content: buildArtifactContent(context) },
+        audience: {
+          description: buildAudienceDescription(context),
+          source: "dashboard_context_packet"
+        },
+        context,
         simulation: {
           mode: $("#mode").value,
           target_n: Number($("#target-n").value),
@@ -175,8 +264,10 @@ function renderResult(data) {
   $("#result-note").textContent = `${data.simulation_design?.simulated_n || 0} simulated people. Export this result into your next agent conversation.`;
   const distribution = $("#distribution");
   const clusters = $("#clusters");
+  const next = $("#result-next");
   distribution.innerHTML = "";
   clusters.innerHTML = "";
+  next.innerHTML = "";
 
   for (const item of data.reaction_distribution || []) {
     const pct = Math.round(Number(item.share || 0) * 100);
@@ -203,6 +294,16 @@ function renderResult(data) {
     `;
     clusters.append(el);
   }
+
+  const suggestions = data.next_simulation_inputs || data.suggested_next_tests || [];
+  if (suggestions.length) {
+    next.innerHTML = `
+      <h3>What to simulate next</h3>
+      <ul class="small">
+        ${suggestions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    `;
+  }
 }
 
 function downloadLatest(format) {
@@ -222,12 +323,94 @@ function syncAutoTopup(account) {
 }
 
 function loadSample() {
-  $("#objective").value = "Decide whether Yomira is worth launching as a paid developer API.";
-  $("#audience").value = "Indie hackers, AI tool builders, agency owners, startup founders, and operators who already use Claude Code, Codex, Cursor, or other agentic coding tools.";
-  $("#artifact").value = "An API that simulates how likely human audiences would react to a product, profile, offer, or content artifact. It returns many realistic private voices and aggregate patterns for better decisions.";
+  applyTemplate("product");
   $("#target-n").value = 40;
   $("#voice-limit").value = 8;
   $("#mode").value = "fast";
+  updateContextPreview();
+}
+
+function applyTemplate(templateId, options = {}) {
+  const template = templates[templateId] || templates.message;
+  state.template = templateId;
+  for (const button of $$("[data-template]")) {
+    button.setAttribute("aria-pressed", String(button.dataset.template === templateId));
+  }
+  $("#artifact-type").value = template.artifactType;
+  const shouldFill = !options.preserveIfFilled || !$("#artifact").value.trim();
+  if (shouldFill) {
+    $("#objective").value = template.objective;
+    $("#artifact").value = template.artifact;
+    $("#audience").value = template.audience;
+    $("#channel").value = template.channel;
+    $("#desired-action").value = template.desiredAction;
+    $("#sender-context").value = template.senderContext;
+    $("#known-concerns").value = template.concerns;
+    $("#alternatives").value = template.alternatives;
+    $("#available-data").value = template.availableData;
+  }
+  updateContextPreview();
+}
+
+function buildContextPacket() {
+  return {
+    use_case: state.template,
+    channel: $("#channel").value.trim(),
+    desired_action: $("#desired-action").value.trim(),
+    sender_context: $("#sender-context").value.trim(),
+    known_concerns: $("#known-concerns").value.trim(),
+    alternatives: $("#alternatives").value.trim(),
+    available_data: $("#available-data").value.trim()
+  };
+}
+
+function buildArtifactContent(context) {
+  return `${$("#artifact").value.trim()}
+
+---
+Yomira context packet
+Use case: ${context.use_case}
+Channel / situation: ${context.channel}
+Sender / company context: ${context.sender_context}
+Desired action: ${context.desired_action}
+Known concerns / objections: ${context.known_concerns}
+Alternatives or variants being considered: ${context.alternatives}
+Available data or grounding material: ${context.available_data}`;
+}
+
+function buildAudienceDescription(context) {
+  return `${$("#audience").value.trim()}
+
+Scene context:
+- Channel / situation: ${context.channel}
+- Desired action: ${context.desired_action}
+- Sender / company context: ${context.sender_context}
+- Known concerns: ${context.known_concerns}
+- Available data: ${context.available_data}`;
+}
+
+function updateContextPreview() {
+  const checks = {
+    artifact: $("#artifact").value.trim().length >= 80,
+    audience: $("#audience").value.trim().length >= 50,
+    channel: $("#channel").value.trim().length >= 12,
+    sender: $("#sender-context").value.trim().length >= 40,
+    action: $("#desired-action").value.trim().length >= 15,
+    concerns: $("#known-concerns").value.trim().length >= 30
+  };
+  for (const [key, value] of Object.entries(checks)) {
+    document.querySelector(`[data-check="${key}"]`)?.classList.toggle("done", value);
+  }
+  const context = buildContextPacket();
+  $("#context-preview").textContent = [
+    `Use case: ${context.use_case}`,
+    `Channel: ${context.channel || "(missing)"}`,
+    `Desired action: ${context.desired_action || "(missing)"}`,
+    `Sender context: ${context.sender_context || "(missing)"}`,
+    `Known concerns: ${context.known_concerns || "(missing)"}`,
+    `Alternatives: ${context.alternatives || "(optional)"}`,
+    `Available data: ${context.available_data || "(optional)"}`
+  ].join("\n");
 }
 
 function agentSetupPrompt() {
@@ -242,12 +425,13 @@ ${state.apiKey}
 When I ask you to simulate reactions, do this:
 
 1. Identify the exact artifact people will see. If the artifact is missing, ask me for it.
-2. Build a context packet from the current conversation: objective, audience, channel, sender/company context, desired action, known concerns, and alternatives.
+2. Build a context packet from the current conversation, files, docs, and company context: objective, audience, channel, sender/company context, desired action, known concerns, alternatives, and available data.
 3. Call POST /api/simulate with:
    - objective
    - artifact.type
-   - artifact.content
-   - audience.description
+   - artifact.content, including the exact artifact plus the context packet
+   - audience.description, including who sees it and the scene they see it in
+   - context, if your client can send extra JSON fields
    - simulation.mode: "fast" for first pass, "standard" for serious decisions
    - simulation.target_n: 40 for first pass, 120 for serious decisions
 4. Poll GET /api/simulations/{simulation_id} until completed.
